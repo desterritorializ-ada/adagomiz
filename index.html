@@ -571,7 +571,7 @@ function openWork(id){
   if(w.credits)html+=`<div class="modal-credits">${w.credits}</div>`;
   const scoreIds=['dos-cisnes','kuzemallu','bosque','llamaban','polyflux','purpur'];
   let linksHtml='';
-  if(scoreIds.includes(id)) linksHtml+=`<button onclick="closeModal();setTimeout(()=>openScore('${id}'),80)" class="modal-link" style="cursor:none;font-family:'Pangram','Inter',Helvetica,sans-serif;">📄 ver partitura</button>`;
+  if(scoreIds.includes(id)) linksHtml+=`<a href="#" onclick="closeModal();setTimeout(()=>openScore('${id}'),80);return false;" class="modal-link">📄 ver partitura</a>`;
   if(w.links&&w.links.length) w.links.forEach(l=>linksHtml+=`<a href="${l.url}" target="_blank" class="modal-link">${l.label}</a>`);
   if(linksHtml) html+=`<div class="modal-links">${linksHtml}</div>`;
   document.getElementById('modal-content').innerHTML=html;
@@ -590,143 +590,110 @@ document.addEventListener('keydown',function(e){
 </script>
 
 <!-- PDF.js score viewer -->
-<script type="module">
-  const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs';
-  const WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+(function(){
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-  // Score mappings: workId → array of {label, file}
-  const BASE = 'https://archive.org/download/scores_ada_gomiz_2026/';
+  var BASE = 'https://archive.org/download/scores_ada_gomiz_2026/';
   window.SCORE_FILES = {
-    'dos-cisnes': [
-      {label:'Dos Cisnes Negros', file: BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}
-    ],
-    'kuzemallu': [
-      {label:'Küzemallu', file: BASE+'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}
-    ],
+    'dos-cisnes': [{label:'Dos Cisnes Negros', file:BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}],
+    'kuzemallu':  [{label:'Küzemallu',         file:BASE+'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}],
     'bosque': [
-      {label:'Fandanguillos', file: BASE+'scores/fandanguillos_2025.pdf'},
-      {label:'Nana Sombría', file: BASE+'scores/nana_sombria_2025.pdf'},
-      {label:'Bulerías', file: BASE+'scores/bulerias_2025.pdf'}
+      {label:'Fandanguillos', file:BASE+'scores/fandanguillos_2025.pdf'},
+      {label:'Nana Sombría',  file:BASE+'scores/nana_sombria_2025.pdf'},
+      {label:'Bulerías',      file:BASE+'scores/bulerias_2025.pdf'}
     ],
-    'llamaban': [
-      {label:'Polígonos', file: BASE+'scores/poligonos_ada_gomiz.pdf'}
-    ],
-    'polyflux': [
-      {label:'Polyfluxaoboiotic', file: BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}
-    ],
-    'purpur': [
-      {label:'Púrpur', file: BASE+'scores/purpur_ada_gomiz.pdf'}
-    ]
+    'llamaban': [{label:'Polígonos',        file:BASE+'scores/poligonos_ada_gomiz.pdf'}],
+    'polyflux': [{label:'Polyfluxaoboiotic',file:BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}],
+    'purpur':   [{label:'Púrpur',           file:BASE+'scores/purpur_ada_gomiz.pdf'}]
   };
 
-  let pdfjsLib = null;
-  let pdfDoc = null;
-  let currentPage = 1;
-  let totalPages = 0;
+  var pdfDoc=null, currentPage=1, totalPages=0;
 
-  async function initPdfJs() {
-    if (pdfjsLib) return;
-    const mod = await import(PDFJS_URL);
-    pdfjsLib = mod;
-    pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_URL;
-  }
-
-  async function loadScore(pdfPath) {
-    const loading = document.getElementById('score-loading');
-    const canvas = document.getElementById('pdf-canvas');
+  function loadScore(pdfPath) {
+    var loading = document.getElementById('score-loading');
+    var canvas  = document.getElementById('pdf-canvas');
     loading.style.display = 'flex';
-    canvas.style.display = 'none';
-    currentPage = 1;
-    pdfDoc = null;
-
-    await initPdfJs();
-    pdfDoc = await pdfjsLib.getDocument({ url: pdfPath }).promise;
-    totalPages = pdfDoc.numPages;
-    loading.style.display = 'none';
-    canvas.style.display = 'block';
-    await renderPage(currentPage);
+    canvas.style.display  = 'none';
+    currentPage = 1; pdfDoc = null;
+    pdfjsLib.getDocument({url: pdfPath, withCredentials: false}).promise.then(function(doc){
+      pdfDoc = doc; totalPages = doc.numPages;
+      loading.style.display = 'none';
+      canvas.style.display  = 'block';
+      renderPage(1);
+    }).catch(function(err){
+      loading.textContent = 'error al cargar — ' + err.message;
+      console.error(err);
+    });
   }
 
-  async function renderPage(num) {
+  function renderPage(num) {
     if (!pdfDoc) return;
-    const canvas = document.getElementById('pdf-canvas');
-    const ctx = canvas.getContext('2d');
-    const page = await pdfDoc.getPage(num);
-    const containerWidth = canvas.parentElement.clientWidth - 2;
-    const scale = containerWidth / page.getViewport({scale:1}).width;
-    const viewport = page.getViewport({scale});
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-    await page.render({canvasContext: ctx, viewport}).promise;
-    document.getElementById('score-page-info').textContent = `${num} / ${totalPages}`;
+    var canvas = document.getElementById('pdf-canvas');
+    var ctx = canvas.getContext('2d');
+    pdfDoc.getPage(num).then(function(page){
+      var w = canvas.parentElement.clientWidth - 2;
+      var scale = w / page.getViewport({scale:1}).width;
+      var vp = page.getViewport({scale:scale});
+      canvas.width = vp.width; canvas.height = vp.height;
+      page.render({canvasContext:ctx, viewport:vp}).promise.then(function(){
+        document.getElementById('score-page-info').textContent = num+' / '+totalPages;
+      });
+    });
   }
 
-  window.nextPage = function() {
-    if (pdfDoc && currentPage < totalPages) { currentPage++; renderPage(currentPage); }
-  };
-  window.prevPage = function() {
-    if (pdfDoc && currentPage > 1) { currentPage--; renderPage(currentPage); }
-  };
+  window.nextPage = function(){ if(pdfDoc && currentPage<totalPages){ currentPage++; renderPage(currentPage); }};
+  window.prevPage = function(){ if(pdfDoc && currentPage>1){ currentPage--; renderPage(currentPage); }};
 
-  window.openScore = async function(workId) {
-    const files = window.SCORE_FILES[workId];
-    if (!files || !files.length) return;
-
-    const modal = document.getElementById('score-modal');
-    const titleEl = document.getElementById('score-modal-title');
-    const btnsEl = document.getElementById('score-file-btns');
-
-    // Get work title from works object
-    const w = works[workId];
-    titleEl.textContent = w ? w.title + ' — partitura' : 'partitura';
-
-    // Build file selector buttons if multiple files
+  window.openScore = function(workId){
+    var files = window.SCORE_FILES[workId];
+    if (!files||!files.length) return;
+    var modal   = document.getElementById('score-modal');
+    var titleEl = document.getElementById('score-modal-title');
+    var btnsEl  = document.getElementById('score-file-btns');
+    var w = works[workId];
+    titleEl.textContent = (w ? w.title : workId) + ' — partitura';
     btnsEl.innerHTML = '';
     if (files.length > 1) {
-      files.forEach((f, i) => {
-        const btn = document.createElement('button');
-        btn.textContent = f.label;
-        btn.dataset.file = f.file;
-        btn.style.cssText = "font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.55rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--tq-foam);border:1px solid rgba(75,191,174,.3);padding:.35rem .9rem;background:transparent;cursor:none;transition:all .3s;";
-        btn.onclick = () => {
-          btnsEl.querySelectorAll('button').forEach(b => {
-            b.style.background = 'transparent';
-            b.style.borderColor = 'rgba(75,191,174,.3)';
-            b.style.color = 'var(--tq-foam)';
-          });
-          btn.style.background = 'rgba(75,191,174,.12)';
-          btn.style.borderColor = 'var(--tq-light)';
+      files.forEach(function(f,i){
+        var a = document.createElement('a');
+        a.href='#'; a.textContent=f.label; a.className='modal-link';
+        if (i===0){ a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)'; }
+        a.onclick = function(e){
+          e.preventDefault();
+          btnsEl.querySelectorAll('a').forEach(function(b){ b.style.background=''; b.style.borderColor=''; });
+          a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)';
           loadScore(f.file);
         };
-        if (i === 0) {
-          btn.style.background = 'rgba(75,191,174,.12)';
-          btn.style.borderColor = 'var(--tq-light)';
-        }
-        btnsEl.appendChild(btn);
+        btnsEl.appendChild(a);
       });
     }
-
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    await loadScore(files[0].file);
+    loadScore(files[0].file);
   };
 
-  window.closeScoreModal = function() {
+  window.closeScoreModal = function(){
     document.getElementById('score-modal').classList.remove('open');
     document.body.style.overflow = '';
     pdfDoc = null;
-    const canvas = document.getElementById('pdf-canvas');
-    canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+    var c = document.getElementById('pdf-canvas');
+    c.getContext('2d').clearRect(0,0,c.width,c.height);
   };
 
-  document.getElementById('score-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeScoreModal();
+  document.addEventListener('DOMContentLoaded', function(){
+    document.getElementById('score-modal').addEventListener('click', function(e){
+      if(e.target===this) closeScoreModal();
+    });
   });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('score-modal').classList.contains('open')) closeScoreModal();
-    if (e.key === 'ArrowRight') nextPage();
-    if (e.key === 'ArrowLeft') prevPage();
+  document.addEventListener('keydown', function(e){
+    if(!document.getElementById('score-modal').classList.contains('open')) return;
+    if(e.key==='Escape') closeScoreModal();
+    if(e.key==='ArrowRight') nextPage();
+    if(e.key==='ArrowLeft') prevPage();
   });
+})();
 </script>
 </body>
 </html>
