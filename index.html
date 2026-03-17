@@ -197,14 +197,11 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   <div style="max-width:960px;margin:0 auto;padding:5rem 2rem 2rem;position:relative;">
     <div id="score-modal-title" style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.42em;text-transform:uppercase;color:var(--tq-light);margin-bottom:.8rem;"></div>
     <div id="score-file-btns" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.5rem;"></div>
-    <div style="position:relative;background:rgba(240,250,248,.03);border:1px solid rgba(75,191,174,.12);min-height:300px;">
-      <div id="score-loading" style="display:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;letter-spacing:.2em;color:var(--tq-mid);">cargando partitura…</div>
-      <canvas id="pdf-canvas" style="width:100%;display:block;"></canvas>
+    <div style="position:relative;background:rgba(240,250,248,.03);border:1px solid rgba(75,191,174,.12);min-height:600px;">
+      <div id="score-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;letter-spacing:.2em;color:var(--tq-mid);">cargando partitura…</div>
+      <iframe id="pdf-frame" style="width:100%;height:80vh;min-height:600px;border:none;display:none;" allowfullscreen></iframe>
     </div>
     <div style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-top:1.5rem;">
-      <button onclick="prevPage()" style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(75,191,174,.3);padding:.45rem 1.2rem;background:transparent;cursor:none;transition:all .3s;" onmouseover="this.style.background='rgba(75,191,174,.08)'" onmouseout="this.style.background='transparent'">← anterior</button>
-      <span id="score-page-info" style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.65rem;color:var(--tq-mid);letter-spacing:.18em;min-width:80px;text-align:center;"></span>
-      <button onclick="nextPage()" style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(75,191,174,.3);padding:.45rem 1.2rem;background:transparent;cursor:none;transition:all .3s;" onmouseover="this.style.background='rgba(75,191,174,.08)'" onmouseout="this.style.background='transparent'">siguiente →</button>
     </div>
   </div>
 </div>
@@ -571,7 +568,7 @@ function openWork(id){
   if(w.credits)html+=`<div class="modal-credits">${w.credits}</div>`;
   const scoreIds=['dos-cisnes','kuzemallu','bosque','llamaban','polyflux','purpur'];
   let linksHtml='';
-  if(scoreIds.includes(id)) linksHtml+=`<a href="#" onclick="closeModal();setTimeout(()=>openScore('${id}'),80);return false;" class="modal-link">📄 ver partitura</a>`;
+  if(scoreIds.includes(id)) linksHtml+=`<a href="#" onclick="closeModal();setTimeout(()=>openScore('${id}'),80);return false;" class="modal-link">ver partitura</a>`;
   if(w.links&&w.links.length) w.links.forEach(l=>linksHtml+=`<a href="${l.url}" target="_blank" class="modal-link">${l.label}</a>`);
   if(linksHtml) html+=`<div class="modal-links">${linksHtml}</div>`;
   document.getElementById('modal-content').innerHTML=html;
@@ -589,12 +586,9 @@ document.addEventListener('keydown',function(e){
 });
 </script>
 
-<!-- PDF.js score viewer -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<!-- Score viewer via Google Docs -->
 <script>
 (function(){
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
   var BASE = 'https://archive.org/download/scores_ada_gomiz_2026/';
   window.SCORE_FILES = {
     'dos-cisnes': [{label:'Dos Cisnes Negros', file:BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}],
@@ -604,49 +598,22 @@ document.addEventListener('keydown',function(e){
       {label:'Nana Sombría',  file:BASE+'scores/nana_sombria_2025.pdf'},
       {label:'Bulerías',      file:BASE+'scores/bulerias_2025.pdf'}
     ],
-    'llamaban': [{label:'Polígonos',        file:BASE+'scores/poligonos_ada_gomiz.pdf'}],
-    'polyflux': [{label:'Polyfluxaoboiotic',file:BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}],
-    'purpur':   [{label:'Púrpur',           file:BASE+'scores/purpur_ada_gomiz.pdf'}]
+    'llamaban': [{label:'Polígonos',         file:BASE+'scores/poligonos_ada_gomiz.pdf'}],
+    'polyflux': [{label:'Polyfluxaoboiotic', file:BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}],
+    'purpur':   [{label:'Púrpur',            file:BASE+'scores/purpur_ada_gomiz.pdf'}]
   };
 
-  var pdfDoc=null, currentPage=1, totalPages=0;
-
-  function loadScore(pdfPath) {
+  function loadScore(pdfUrl) {
     var loading = document.getElementById('score-loading');
-    var canvas  = document.getElementById('pdf-canvas');
+    var frame   = document.getElementById('pdf-frame');
     loading.style.display = 'flex';
-    canvas.style.display  = 'none';
-    currentPage = 1; pdfDoc = null;
-    pdfjsLib.getDocument({url: pdfPath, withCredentials: false}).promise.then(function(doc){
-      pdfDoc = doc; totalPages = doc.numPages;
-      loading.style.display = 'none';
-      canvas.style.display  = 'block';
-      renderPage(1);
-    }).catch(function(err){
-      loading.textContent = 'error al cargar — ' + err.message;
-      console.error(err);
-    });
+    frame.style.display   = 'none';
+    var viewer = 'https://docs.google.com/viewer?url=' + encodeURIComponent(pdfUrl) + '&embedded=true';
+    frame.onload = function(){ loading.style.display='none'; frame.style.display='block'; };
+    frame.src = viewer;
   }
 
-  function renderPage(num) {
-    if (!pdfDoc) return;
-    var canvas = document.getElementById('pdf-canvas');
-    var ctx = canvas.getContext('2d');
-    pdfDoc.getPage(num).then(function(page){
-      var w = canvas.parentElement.clientWidth - 2;
-      var scale = w / page.getViewport({scale:1}).width;
-      var vp = page.getViewport({scale:scale});
-      canvas.width = vp.width; canvas.height = vp.height;
-      page.render({canvasContext:ctx, viewport:vp}).promise.then(function(){
-        document.getElementById('score-page-info').textContent = num+' / '+totalPages;
-      });
-    });
-  }
-
-  window.nextPage = function(){ if(pdfDoc && currentPage<totalPages){ currentPage++; renderPage(currentPage); }};
-  window.prevPage = function(){ if(pdfDoc && currentPage>1){ currentPage--; renderPage(currentPage); }};
-
-  window.openScore = function(workId){
+  window.openScore = function(workId) {
     var files = window.SCORE_FILES[workId];
     if (!files||!files.length) return;
     var modal   = document.getElementById('score-modal');
@@ -659,7 +626,7 @@ document.addEventListener('keydown',function(e){
       files.forEach(function(f,i){
         var a = document.createElement('a');
         a.href='#'; a.textContent=f.label; a.className='modal-link';
-        if (i===0){ a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)'; }
+        if(i===0){ a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)'; }
         a.onclick = function(e){
           e.preventDefault();
           btnsEl.querySelectorAll('a').forEach(function(b){ b.style.background=''; b.style.borderColor=''; });
@@ -677,9 +644,9 @@ document.addEventListener('keydown',function(e){
   window.closeScoreModal = function(){
     document.getElementById('score-modal').classList.remove('open');
     document.body.style.overflow = '';
-    pdfDoc = null;
-    var c = document.getElementById('pdf-canvas');
-    c.getContext('2d').clearRect(0,0,c.width,c.height);
+    var frame = document.getElementById('pdf-frame');
+    frame.src = ''; frame.style.display = 'none';
+    document.getElementById('score-loading').style.display = 'flex';
   };
 
   document.addEventListener('DOMContentLoaded', function(){
@@ -688,10 +655,7 @@ document.addEventListener('keydown',function(e){
     });
   });
   document.addEventListener('keydown', function(e){
-    if(!document.getElementById('score-modal').classList.contains('open')) return;
-    if(e.key==='Escape') closeScoreModal();
-    if(e.key==='ArrowRight') nextPage();
-    if(e.key==='ArrowLeft') prevPage();
+    if(e.key==='Escape' && document.getElementById('score-modal').classList.contains('open')) closeScoreModal();
   });
 })();
 </script>
