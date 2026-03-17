@@ -595,26 +595,27 @@ document.addEventListener('keydown',function(e){
   const WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs';
 
   // Score mappings: workId → array of {label, file}
+  const BASE = 'https://archive.org/download/scores_ada_gomiz_2026/';
   window.SCORE_FILES = {
     'dos-cisnes': [
-      {label:'Dos Cisnes Negros', file:'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}
+      {label:'Dos Cisnes Negros', file: BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}
     ],
     'kuzemallu': [
-      {label:'Küzemallu', file:'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}
+      {label:'Küzemallu', file: BASE+'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}
     ],
     'bosque': [
-      {label:'Fandanguillos', file:'scores/fandanguillos_2025.pdf'},
-      {label:'Nana Sombría', file:'scores/nana_sombria_2025.pdf'},
-      {label:'Bulerías', file:'scores/bulerias_2025.pdf'}
+      {label:'Fandanguillos', file: BASE+'scores/fandanguillos_2025.pdf'},
+      {label:'Nana Sombría', file: BASE+'scores/nana_sombria_2025.pdf'},
+      {label:'Bulerías', file: BASE+'scores/bulerias_2025.pdf'}
     ],
     'llamaban': [
-      {label:'Polígonos', file:'scores/Poligonos_general.pdf'}
+      {label:'Polígonos', file: BASE+'scores/poligonos_ada_gomiz.pdf'}
     ],
     'polyflux': [
-      {label:'Polyfluxaoboiotic', file:'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}
+      {label:'Polyfluxaoboiotic', file: BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}
     ],
     'purpur': [
-      {label:'Púrpur', file:'scores/purpur_ada_gomiz.pdf'}
+      {label:'Púrpur', file: BASE+'scores/purpur_ada_gomiz.pdf'}
     ]
   };
 
