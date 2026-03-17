@@ -13,15 +13,12 @@
 @font-face { font-family: 'Pangram'; src: url('fonts/Pangram-Medium.otf') format('opentype'); font-weight: 500; }
 @font-face { font-family: 'Pangram'; src: url('fonts/Pangram-Bold.otf') format('opentype'); font-weight: 700; }
 </style>
-
 <style>
 :root{--tq-deep:#163e39;--tq-mid:#1f7a6e;--tq-light:#4bbfae;--tq-pale:#9dd9d1;--tq-foam:#d6f0ec;--text-main:#e2f5f2;--text-muted:#7dc9be;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{background:var(--tq-deep);color:var(--text-main);font-family:'Inter',Helvetica,Arial,sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
 #cursor{position:fixed;width:10px;height:10px;border-radius:50%;background:rgba(75,191,174,.7);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;}
 #cursor-ring{position:fixed;width:32px;height:32px;border-radius:50%;border:1px solid rgba(75,191,174,.3);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
-#wc{display:none;}
-
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.8rem 4rem;background:linear-gradient(to bottom,rgba(10,38,34,.88),transparent);backdrop-filter:blur(3px);}
 .nav-logo{font-family:'Pangram','Inter',Helvetica,sans-serif;font-weight:300;font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;color:var(--tq-foam);text-decoration:none;}
 .nav-right{display:flex;align-items:center;gap:2.5rem;}
@@ -36,35 +33,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .dropdown a::after{display:none;}.dropdown a:hover{opacity:1;padding-left:2rem;color:var(--tq-foam);}
 .lang-btn{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(75,191,174,.35);padding:.4rem .9rem;background:transparent;cursor:none;transition:all .35s;white-space:nowrap;flex-shrink:0;}
 .lang-btn:hover{background:rgba(75,191,174,.1);border-color:var(--tq-light);color:var(--tq-foam);}
-
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 70% 50%,rgba(31,122,110,.22) 0%,transparent 70%);}
-.water-lines{display:none;}
-.water-lines::before,.water-lines::after{content:'';position:absolute;width:200%;height:200%;top:-50%;left:-50%;background:repeating-linear-gradient(0deg,transparent,transparent 42px,rgba(75,191,174,.45) 42px,rgba(75,191,174,.45) 43px);animation:wf 14s ease-in-out infinite;}
-.water-lines::after{background:repeating-linear-gradient(0deg,transparent,transparent 70px,rgba(31,122,110,.35) 70px,rgba(31,122,110,.35) 71px);animation:wf2 20s ease-in-out infinite;}
-@keyframes wf{0%,100%{transform:translateY(0) skewX(0)}25%{transform:translateY(-18px) skewX(1.2deg)}75%{transform:translateY(-12px) skewX(-.8deg)}}
-@keyframes wf2{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px) skewX(-1.5deg)}}
 .hero-portrait{position:absolute;right:0;top:0;bottom:0;width:52vw;max-width:680px;overflow:hidden;}
 .hero-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:1;filter:saturate(.9) contrast(1.05);}
 .hero-portrait::after{display:none;}
 .hero-content{position:relative;z-index:2;max-width:50vw;}
 .hero-eyebrow{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.68rem;font-weight:300;letter-spacing:.42em;text-transform:uppercase;color:var(--tq-light);margin-bottom:1.4rem;opacity:0;animation:fadeUp 1s ease forwards .3s;}
-.hero-name{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:200;line-height:1;color:var(--tq-foam);margin-bottom:.5rem;letter-spacing:.04em;opacity:0;animation:fadeUp 1s ease forwards .6s;letter-spacing:-.01em;}
+.hero-name{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:clamp(2rem,4.5vw,3.8rem);font-weight:200;line-height:1;color:var(--tq-foam);margin-bottom:.5rem;opacity:0;animation:fadeUp 1s ease forwards .6s;letter-spacing:-.01em;}
 .hero-role{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2vw,1.4rem);color:var(--tq-light);letter-spacing:.06em;margin-bottom:2.5rem;opacity:0;animation:fadeUp 1s ease forwards .85s;}
 .hero-desc{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.92rem;font-weight:300;line-height:1.9;color:var(--tq-pale);max-width:460px;opacity:0;animation:fadeUp 1s ease forwards 1.1s;}
 .hero-desc em{color:var(--tq-foam);font-style:italic;}
 .scroll-ind{display:none;}
-
 .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--tq-light),transparent);animation:sp 2.5s ease-in-out infinite;}
 @keyframes sp{0%,100%{opacity:.25;transform:scaleY(.65)}50%{opacity:.9;transform:scaleY(1)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
 section{position:relative;z-index:1;padding:7rem 8vw;}
 .sec-label{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.5em;text-transform:uppercase;color:var(--tq-light);margin-bottom:3rem;display:flex;align-items:center;gap:1.5rem;}
 .sec-label::after{content:'';flex:1;max-width:80px;height:1px;background:linear-gradient(to right,var(--tq-mid),transparent);}
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-
 .works-section{background:rgba(0,0,0,.12);}
 .works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;}
 .work-card{position:relative;overflow:hidden;background:rgba(12,52,48,.5);border:1px solid rgba(75,191,174,.07);cursor:none;aspect-ratio:4/3;display:flex;align-items:flex-end;transition:border-color .5s;}
@@ -81,7 +69,6 @@ section{position:relative;z-index:1;padding:7rem 8vw;}
 .work-venue{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.75rem;font-weight:300;letter-spacing:.04em;color:var(--tq-pale);opacity:.65;margin-top:.3rem;}
 .work-open-btn{display:inline-block;margin-top:.8rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.55rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(75,191,174,.3);padding:.3rem .7rem;opacity:0;transition:opacity .4s,background .3s;cursor:none;}
 .work-card:hover .work-open-btn{opacity:1;}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(4,20,18,.92);z-index:500;backdrop-filter:blur(10px);overflow-y:auto;}
 .modal-overlay.open{display:block;}
 .modal-inner{max-width:760px;margin:0 auto;padding:6rem 3rem 4rem;position:relative;}
@@ -104,7 +91,15 @@ section{position:relative;z-index:1;padding:7rem 8vw;}
 .modal-blockquote{border-left:2px solid rgba(75,191,174,.3);padding-left:1.5rem;margin:2rem 0;}
 .modal-blockquote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--tq-pale);line-height:1.9;opacity:.85;}
 .modal-blockquote cite{display:block;margin-top:.6rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;letter-spacing:.2em;color:var(--tq-mid);font-style:normal;}
-
+/* Video embed */
+.modal-video-wrap{position:relative;width:100%;padding-bottom:56.25%;background:#000;margin:1.5rem 0 2rem;overflow:hidden;}
+.modal-video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+/* Video tabs */
+.modal-video-tabs{display:flex;gap:0;margin-top:1.5rem;border-bottom:1px solid rgba(75,191,174,.15);}
+.modal-video-tab{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--tq-pale);background:none;border:none;border-bottom:2px solid transparent;padding:.6rem 1.2rem;cursor:none;transition:all .3s;opacity:.55;}
+.modal-video-tab.active{color:var(--tq-light);border-bottom-color:var(--tq-light);opacity:1;}
+.modal-video-tab:hover{opacity:.85;color:var(--tq-foam);}
+.modal-video-panel{display:none;}.modal-video-panel.active{display:block;}
 .bio-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:6vw;align-items:start;}
 .bio-img-frame{position:relative;aspect-ratio:3/4;overflow:hidden;}
 .bio-img-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.7) contrast(1.05);}
@@ -115,25 +110,19 @@ section{position:relative;z-index:1;padding:7rem 8vw;}
 .bio-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--tq-light);margin-bottom:2.2rem;}
 .bio-para{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.88rem;font-weight:300;line-height:1.95;color:var(--tq-pale);margin-bottom:1.4rem;}
 .bio-para em{color:var(--tq-foam);font-style:italic;}.bio-para strong{color:var(--tq-foam);font-weight:400;font-style:italic;}
-.bio-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem;}
-.bio-tag{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(75,191,174,.25);padding:.35rem .8rem;}
-
 .gallery-section{background:rgba(0,0,0,.1);}
 .gallery-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;}
 .gallery-item{position:relative;overflow:hidden;cursor:none;aspect-ratio:1;}
-.gallery-item:first-child{grid-column:span 1;}
 .gallery-item img{width:100%;height:100%;object-fit:cover;filter:saturate(.6) contrast(1.05);transition:filter .6s,transform .7s;display:block;}
 .gallery-item:hover img{filter:saturate(.9) contrast(1.1);transform:scale(1.03);}
 .gallery-item::after{content:'';position:absolute;inset:0;background:rgba(8,38,34,.2);transition:background .4s;}
 .gallery-item:hover::after{background:rgba(8,38,34,.05);}
-
 .cv-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem 6vw;}
 .cv-block h3{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--tq-light);margin-bottom:1.8rem;padding-bottom:.8rem;border-bottom:1px solid rgba(75,191,174,.15);}
 .cv-entry{margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(75,191,174,.06);}
 .cv-entry-year{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.2em;color:var(--tq-mid);margin-bottom:.2rem;}
 .cv-entry-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:var(--tq-foam);line-height:1.3;}
 .cv-entry-detail{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.78rem;font-weight:300;color:var(--tq-pale);opacity:.7;margin-top:.15rem;line-height:1.5;}
-
 .coming-section{background:rgba(0,0,0,.08);}
 .coming-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.5rem;}
 .coming-card{border:1px solid rgba(75,191,174,.12);padding:2rem;position:relative;overflow:hidden;transition:border-color .4s;}
@@ -142,7 +131,6 @@ section{position:relative;z-index:1;padding:7rem 8vw;}
 .coming-year{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.25em;color:var(--tq-mid);margin-bottom:.5rem;}
 .coming-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-weight:200;font-size:1rem;color:var(--tq-foam);margin-bottom:.4rem;}
 .coming-detail{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.8rem;font-weight:300;color:var(--tq-pale);line-height:1.7;opacity:.7;}
-
 .log-section{background:rgba(0,0,0,.1);}
 .log-list{display:flex;flex-direction:column;}
 .log-entry{display:grid;grid-template-columns:110px 1fr;gap:3rem;padding:2.2rem 0;border-bottom:1px solid rgba(75,191,174,.09);transition:all .4s;cursor:none;}
@@ -150,25 +138,18 @@ section{position:relative;z-index:1;padding:7rem 8vw;}
 .log-date{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.6rem;font-weight:400;letter-spacing:.18em;color:var(--tq-mid);padding-top:.25rem;text-align:right;}
 .log-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--tq-foam);margin-bottom:.3rem;}
 .log-body{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.82rem;font-weight:300;color:var(--tq-pale);line-height:1.8;opacity:.72;}
-
 .contact-section{text-align:center;padding:10rem 8vw;background:linear-gradient(to bottom,transparent,rgba(4,22,20,.5));}
-.contact-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:clamp(1.8rem,4.5vw,3.5rem);font-weight:200;color:var(--tq-foam);margin-bottom:.8rem;letter-spacing:-.02em;}
-.contact-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--tq-light);margin-bottom:3.5rem;}
 .contact-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;}
 .contact-link{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-foam);text-decoration:none;border:1px solid rgba(75,191,174,.35);padding:1rem 2.5rem;position:relative;overflow:hidden;transition:border-color .4s;}
 .contact-link::before{content:'';position:absolute;inset:0;background:rgba(75,191,174,.08);transform:scaleX(0);transform-origin:left;transition:transform .45s ease;}
 .contact-link:hover::before{transform:scaleX(1);}.contact-link:hover{border-color:rgba(75,191,174,.7);}
-
 footer{position:relative;z-index:1;text-align:center;padding:2.5rem;border-top:1px solid rgba(75,191,174,.09);}
 footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:300;letter-spacing:.3em;color:var(--tq-mid);opacity:.55;}
-
 #lightbox{display:none;position:fixed;inset:0;background:rgba(4,20,18,.92);z-index:1000;justify-content:center;align-items:center;backdrop-filter:blur(8px);}
 #lightbox.open{display:flex;}
 #lightbox img{max-width:88vw;max-height:88vh;object-fit:contain;}
 #lightbox-close{position:absolute;top:2rem;right:2.5rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;letter-spacing:.3em;color:var(--tq-pale);cursor:none;background:none;border:none;text-transform:uppercase;}
-
 [data-lang="en"]{display:none;}
-
 @media(max-width:900px){
   nav{padding:1.4rem 1.5rem;}
   .nav-links{gap:1.2rem;display:none;}
@@ -191,7 +172,7 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   <div class="modal-inner" id="modal-content"></div>
 </div>
 
-<!-- SCORE MODAL (PDF.js) -->
+<!-- SCORE MODAL -->
 <div class="modal-overlay" id="score-modal">
   <button class="modal-close" onclick="closeScoreModal()" style="cursor:none">✕ cerrar</button>
   <div style="max-width:960px;margin:0 auto;padding:5rem 2rem 2rem;position:relative;">
@@ -200,8 +181,6 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
     <div style="position:relative;background:rgba(240,250,248,.03);border:1px solid rgba(75,191,174,.12);min-height:600px;">
       <div id="score-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;letter-spacing:.2em;color:var(--tq-mid);">cargando partitura…</div>
       <iframe id="pdf-frame" style="width:100%;height:80vh;min-height:600px;border:none;display:none;" allowfullscreen></iframe>
-    </div>
-    <div style="display:flex;justify-content:center;align-items:center;gap:2rem;margin-top:1.5rem;">
     </div>
   </div>
 </div>
@@ -235,13 +214,9 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  
-  <div class="hero-portrait">
-    <img src="images/01-portada.jpg" alt="Ada Gomiz">
-  </div>
+  <div class="hero-portrait"><img src="images/01-portada.jpg" alt="Ada Gomiz"></div>
   <div class="hero-content">
     <p class="hero-eyebrow"><span data-lang="es">Buenos Aires · Argentina</span><span data-lang="en">Buenos Aires · Argentina</span></p>
     <h1 class="hero-name">Ada Gomiz</h1>
@@ -254,87 +229,68 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
       <span data-lang="en">Her work explores the intersections between contemporary chamber music composition and the cosmopoetics of Latin American neo-baroque literature. She engages in practices oriented toward improvisation, sound art, performance, and dreamlike intermedialities.</span>
     </p>
   </div>
-  <div class="scroll-ind">
-    <span data-lang="es">descender</span><span data-lang="en">scroll</span>
-    <div class="scroll-line"></div>
-  </div>
 </section>
 
-<!-- WORKS -->
 <section id="works" class="works-section">
   <div class="sec-label"><span data-lang="es">Obras Seleccionadas</span><span data-lang="en">Selected Works</span></div>
   <div class="works-grid">
-
     <div class="work-card reveal" onclick="openWork('dos-cisnes')">
       <div class="work-card-bg"><img src="images/03-dos-cisnes.jpg" alt="Dos Cisnes Negros"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Dos Cisnes Negros</div><div class="work-venue"><span data-lang="es">para dos clarinetes bajos</span><span data-lang="en" style="display:none">for two bass clarinets</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Dos Cisnes Negros</div><div class="work-venue"><span data-lang="es">para dos clarinetes bajos</span><span data-lang="en">for two bass clarinets</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('hipnoidal')">
       <div class="work-card-bg"><img src="images/04-hipnoidal.png" alt="Hipnoidal"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Hipnoidal</div><div class="work-venue"><span data-lang="es">butoh · teatro de sombras · música en vivo</span><span data-lang="en" style="display:none">butoh · shadow theatre · live music</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Hipnoidal</div><div class="work-venue"><span data-lang="es">butoh · teatro de sombras · música en vivo</span><span data-lang="en">butoh · shadow theatre · live music</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('huella-winka')">
       <div class="work-card-bg"><img src="images/05-huella-winka.jpg" alt="Huella Winka"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Huella Winka — Censored</div><div class="work-venue"><span data-lang="es">shakuhachi y field recordings</span><span data-lang="en" style="display:none">shakuhachi and field recordings</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Huella Winka — Censored</div><div class="work-venue"><span data-lang="es">shakuhachi y field recordings</span><span data-lang="en">shakuhachi and field recordings</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('kuzemallu')">
       <div class="work-card-bg"><img src="images/06-kuzemallu.png" alt="Küzemallu"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Küzemallu</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas</span><span data-lang="en" style="display:none">string quartet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2025</div><div class="work-title">Küzemallu</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas</span><span data-lang="en">string quartet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('bosque')">
       <div class="work-card-bg"><img src="images/07-bosque.jpg" alt="Bosque de Adas"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2023/2024</div><div class="work-title">Bosque de Adas</div><div class="work-venue"><span data-lang="es">viola, contrabajo, vibráfono, percusión, cante y clarinete</span><span data-lang="en" style="display:none">viola, double bass, vibraphone, percussion, singing and clarinet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2023/2024</div><div class="work-title">Bosque de Adas</div><div class="work-venue"><span data-lang="es">viola, contrabajo, vibráfono, percusión, cante y clarinete</span><span data-lang="en">viola, double bass, vibraphone, percussion, singing and clarinet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('llamaban')">
       <div class="work-card-bg"><img src="images/08-llamaban.jpeg" alt="Llamaban los Almúedanos"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Llamaban los Almúedanos</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas y performer</span><span data-lang="en" style="display:none">string quartet and performer</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Llamaban los Almúedanos</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas y performer</span><span data-lang="en">string quartet and performer</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('polyflux')">
       <div class="work-card-bg"><img src="images/09-polyflux.png" alt="Polyfluxaoboiotic"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Polyfluxaoboiotic</div><div class="work-venue"><span data-lang="es">ensamble vocal</span><span data-lang="en" style="display:none">vocal ensemble</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Polyfluxaoboiotic</div><div class="work-venue"><span data-lang="es">ensamble vocal</span><span data-lang="en">vocal ensemble</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('purpur')">
       <div class="work-card-bg"><img src="images/10-purpur.png" alt="Púrpur"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Púrpur</div><div class="work-venue"><span data-lang="es">cello solo</span><span data-lang="en" style="display:none">solo cello</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2022</div><div class="work-title">Púrpur</div><div class="work-venue"><span data-lang="es">cello solo</span><span data-lang="en">solo cello</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('afuerigena')">
       <div class="work-card-bg"><img src="images/11-afuerigena.jpg" alt="Afuerígena"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2021</div><div class="work-title">Afuerígena</div><div class="work-venue"><span data-lang="es">livelooping · visuales generativas · recitado</span><span data-lang="en" style="display:none">livelooping · generative visuals · spoken word</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2021</div><div class="work-title">Afuerígena</div><div class="work-venue"><span data-lang="es">livelooping · visuales generativas · recitado</span><span data-lang="en">livelooping · generative visuals · spoken word</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
     <div class="work-card reveal" onclick="openWork('laberinto')">
       <div class="work-card-bg"><img src="images/12-laberinto.png" alt="Laberinto Áureo"></div>
       <div class="work-card-overlay"></div><div class="work-card-gradient"></div>
-      <div class="work-info"><div class="work-year">2020</div><div class="work-title">Laberinto Áureo</div><div class="work-venue"><span data-lang="es">recitantes, flauta, clarinete, piano y percusión</span><span data-lang="en" style="display:none">speakers, flute, clarinet, piano and percussion</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
+      <div class="work-info"><div class="work-year">2020</div><div class="work-title">Laberinto Áureo</div><div class="work-venue"><span data-lang="es">recitantes, flauta, clarinete, piano y percusión</span><span data-lang="en">speakers, flute, clarinet, piano and percussion</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div>
     </div>
-
   </div>
 </section>
 
-<!-- BIO -->
 <section id="bio">
   <div class="bio-grid">
     <div class="bio-img-wrap reveal">
-      <div class="bio-img-frame">
-        <img src="images/02-bio.jpg" alt="Ada Gomiz">
-      </div>
+      <div class="bio-img-frame"><img src="images/02-bio.jpg" alt="Ada Gomiz"></div>
       <div class="bio-border-deco"></div>
     </div>
     <div class="reveal">
@@ -344,24 +300,24 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
         <span data-lang="es">Compositora · Multiinstrumentista · Artista Sonora · Performer</span>
         <span data-lang="en">Composer · Multi-instrumentalist · Sound Artist · Performer</span>
       </p>
-      <div data-lang="es"><p class="bio-para">Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.</p>
-      <p class="bio-para">Su trabajo explora los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.</p>
-      <p class="bio-para">Habita prácticas orientadas a la improvisación libre y no tan libre, field recording encantatorio, cofradías butohkas y otras intermedialidades oníricas.</p>
-      <p class="bio-para">Sus obras fueron estrenadas en Alemania, Argentina, Dinamarca e Italia, destacando festivales y ciclos como Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival y Urondo Contemporáneo, así como presentaciones en espacios como Kirsten Kjærs Museum, Espacio Mostro y Arte x Arte en el marco de Bienal Sur.</p>
-      <p class="bio-para">Se encuentra finalizando la Licenciatura en Música en la Universidad Nacional de Tres de Febrero (UNTREF) y forma parte del equipo de investigación sobre auralidad de la Maestría en Arte Sonoro, dirigido por Raúl Minsgburg.</p></div>
+      <div data-lang="es">
+        <p class="bio-para">Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.</p>
+        <p class="bio-para">Su trabajo explora los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.</p>
+        <p class="bio-para">Habita prácticas orientadas a la improvisación libre y no tan libre, field recording encantatorio, cofradías butohkas y otras intermedialidades oníricas.</p>
+        <p class="bio-para">Sus obras fueron estrenadas en Alemania, Argentina, Dinamarca e Italia, destacando festivales y ciclos como Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival y Urondo Contemporáneo, así como presentaciones en espacios como Kirsten Kjærs Museum, Espacio Mostro y Arte x Arte en el marco de Bienal Sur.</p>
+        <p class="bio-para">Se encuentra finalizando la Licenciatura en Música en la Universidad Nacional de Tres de Febrero (UNTREF) y forma parte del equipo de investigación sobre auralidad de la Maestría en Arte Sonoro, dirigido por Raúl Minsgburg.</p>
+      </div>
       <div data-lang="en" style="display:none">
-      <p class="bio-para">Ada Gomiz is a composer, sound artist, singer and wind player from Bella Vista, Buenos Aires, Argentina.</p>
-      <p class="bio-para">Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar.</p>
-      <p class="bio-para">She inhabits practices oriented toward free and not-so-free improvisation, enchanted field recording, butoh confraternities and other oneiric intermedialities.</p>
-      <p class="bio-para">Her works have been premiered in Germany, Argentina, Denmark and Italy, at festivals and cycles such as the Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival and Urondo Contemporáneo, as well as in venues such as Kirsten Kjærs Museum, Spazio Mostro and Arte x Arte as part of Bienal Sur.</p>
-      <p class="bio-para">She is completing a Bachelor's Degree in Music at the National University of Tres de Febrero (UNTREF) and is part of the aurality research team of the Master's Program in Sound Art, directed by Raúl Minsgburg.</p>
+        <p class="bio-para">Ada Gomiz is a composer, sound artist, singer and wind player from Bella Vista, Buenos Aires, Argentina.</p>
+        <p class="bio-para">Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar.</p>
+        <p class="bio-para">She inhabits practices oriented toward free and not-so-free improvisation, enchanted field recording, butoh confraternities and other oneiric intermedialities.</p>
+        <p class="bio-para">Her works have been premiered in Germany, Argentina, Denmark and Italy, at festivals and cycles such as the Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival and Urondo Contemporáneo, as well as in venues such as Kirsten Kjærs Museum, Spazio Mostro and Arte x Arte as part of Bienal Sur.</p>
+        <p class="bio-para">She is completing a Bachelor's Degree in Music at the National University of Tres de Febrero (UNTREF) and is part of the aurality research team of the Master's Program in Sound Art, directed by Raúl Minsgburg.</p>
       </div>
-      </div>
+    </div>
   </div>
 </section>
 
-
-<!-- CV -->
 <section id="cv">
   <div class="sec-label">CV 2026</div>
   <div class="cv-grid">
@@ -418,7 +374,6 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   </div>
 </section>
 
-<!-- COMING SOON -->
 <section id="coming" class="coming-section">
   <div class="sec-label"><span data-lang="es">Próximamente</span><span data-lang="en">Coming Soon</span></div>
   <div class="coming-grid">
@@ -431,7 +386,6 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   </div>
 </section>
 
-<!-- LOGBOOK -->
 <section id="logbook" class="log-section">
   <div class="sec-label">Log-book</div>
   <div class="log-list">
@@ -458,7 +412,6 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery" class="gallery-section">
   <div class="sec-label"><span data-lang="es">Galería</span><span data-lang="en">Gallery</span></div>
   <div class="gallery-grid">
@@ -483,7 +436,6 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="contact-section">
   <div class="sec-label" style="justify-content:center;"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></div>
   <div class="contact-links reveal">
@@ -498,14 +450,13 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   <p>© Ada Gomiz 2026 · Buenos Aires, Argentina · <span data-lang="es">todos los derechos reservados</span><span data-lang="en">all rights reserved</span></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 // Cursor
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
-
-// Canvas ripples disabled
 
 // Reveal on scroll
 const revs=document.querySelectorAll('.reveal');
@@ -529,35 +480,74 @@ document.querySelectorAll('[data-lang="es"]').forEach(el=>el.style.display='inli
 function openLightbox(src){document.getElementById('lb-img').src=src;document.getElementById('lightbox').classList.add('open');}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget||e.target.id==='lightbox-close')document.getElementById('lightbox').classList.remove('open');});
 
-// Work modals
+// ── WORKS ────────────────────────────────────────────────────────────────────
 const WORK_IMGS={
-  'dos-cisnes':'images/03-dos-cisnes.jpg',
-  'hipnoidal':'images/04-hipnoidal.png',
-  'huella-winka':'images/05-huella-winka.jpg',
-  'kuzemallu':'images/06-kuzemallu.png',
-  'bosque':'images/07-bosque.jpg',
-  'llamaban':'images/08-llamaban.jpeg',
-  'polyflux':'images/09-polyflux.png',
-  'purpur':'images/10-purpur.png',
-  'afuerigena':'images/11-afuerigena.jpg',
-  'laberinto':'images/12-laberinto.png'
+  'dos-cisnes':'images/03-dos-cisnes.jpg','hipnoidal':'images/04-hipnoidal.png',
+  'huella-winka':'images/05-huella-winka.jpg','kuzemallu':'images/06-kuzemallu.png',
+  'bosque':'images/07-bosque.jpg','llamaban':'images/08-llamaban.jpeg',
+  'polyflux':'images/09-polyflux.png','purpur':'images/10-purpur.png',
+  'afuerigena':'images/11-afuerigena.jpg','laberinto':'images/12-laberinto.png'
 };
 const isScore=id=>['kuzemallu','polyflux','purpur','laberinto'].includes(id);
+
 const works={
-  'dos-cisnes':{year:'2025',title:'Dos Cisnes Negros',subtitle:'para dos clarinetes bajos — for two bass clarinets',body:`<p><em>Dos cisnes negros</em> evoca un ritual de pasaje entre mundos.</p><p>Siguendo el sistema de analogias místicas del etnomusicólogo Marius Schneider, en diversas culturas antiguas el cisne negro representa el animal-simbolo de pasaje entre la vida y la muerte. Es una especie de cuidador entre el nacimiento y la finitud.</p><p>En esta obra, cada clarinete bajo representa un cisne negro. La estructura ritmica se construye a traves de las proporciones numericas de la seguiriya flamenca, palo que se canta en los funerales, conectado directamente con una energetica de lo funerario.</p>`,credits:`<p>Premiered December 17th at Casa Brandon<br>Bass Clarinet 1: Federico Landaburu<br>Bass Clarinet 2: Lautaro Abrego</p>`,links:[]},
-  'hipnoidal':{year:'2025',title:'Hipnoidal',subtitle:'Butoh Dance, Shadow Theatre, live music',body:`<p>Hipnoidal is an interdisciplinary work combining butoh dance, shadow theater, and live music that evokes a state between dreams and wakefulness. From this -in-between- place, we seek to delve into the wonder of the living, exploring the connection with ephemeral territories, elemental forces and that body traversing memories to amplify what we perceive as world, as self, as other.</p><p>Through the primal relationship between light and darkness, the boundaries between the human and the non-human are blurred, revealing nuances in search of meanings that transcends us. A work to remember the cycles, metamorphosis, and finitude of all living organisms. A tribute for the time we are given.</p>`,credits:`<p>Writting: Pierina Lategola<br>Co-direction: Pierina Lategola, Tatiana Zuccolotto & Ada Gomiz<br>Dancers: Pierina Lategola & Tatiana Zuccolotto<br>Music composition and sound performance: Ada Gomiz<br><br>— Premiere Aug 10: Kirsten Kjærs Museum, Denmark<br>— Aug 26: Spazio Mostro, Turin, Italy<br>— Aug 30: Slow Festival, Thisted, Denmark<br>— Sep 5: Art Week 36, North Jutland, Denmark</p>`,links:[{label:'Instagram',url:'https://www.instagram.com/p/DM7cB3Wo8RL/?img_index=1'}]},
-  'huella-winka':{year:'2025',title:'Huella Winka — Censored',subtitle:'para shakuhachi y field recordings',body:`<p>Composición sonora basada en grabaciones de campo, paisajes sonoros e improvisaciones en el sendero Huella Andina, Puelmapu, Argentina.</p><p>Se trata de una obra que dialoga entre lo mítico y la extinción, donde la improvisación vientistica del shakuhachi, los recorridos en huella y las geofonías espesas se enhebran como territorios efimeros, configurando una cartografía sono-imaginal que resquebraja los contornos entre lo humano y un paisaje poblado de misterios.</p><p>Desarrollada en la cátedra Sonido, Paisaje y Territorio de la Maestría en Arte Sonoro de la Universidad Nacional de Tres de Febrero (UNTREF), la obra fue seleccionada para el workshop <em>The Enby Future Manifest</em> del Darmstadt Ferienkurse, donde sería montada como instalación en colaboración con artistas internacionales. Posteriormente, su presentación fue censurada por la Schader Stiftung debido a la inclusión de una cartografía visual que vinculaba el genocidio palestino con el genocidio del pueblo mapuche y el terricidio.</p><p>Un fragmento fue presentado con la performer colombo-palestina Ana Dueri el 2 de agosto en la Orangerie, gracias a la solidaridad de Bill Dietz.</p>`,credits:``,links:[{label:'Ver performance',url:'https://adagomiz.notion.site/huella-winka-orangerie'},{label:'Petición contra la censura',url:'https://www.change.org/p/petition-against-censorship-at-the-2025-darmst%C3%A4dter-ferienkurse'},{label:'Carta abierta al IMD',url:'https://adagomiz.wordpress.com/open-letter-to-the-imd/'},{label:'Open Letter — Fredrika Gullfot',url:'https://www.linkedin.com/pulse/open-letter-response-statements-city-darmstadt-schader-gullfot-x4rpf'},{label:'Marco Momi — On the Return of the Kranichsteiner Musikpreis',url:'https://www.marcomomi.com/Public/News/Le_News/On_the_Return_of_the_2008_Kranichsteiner_Musikpreis.htm'}]},
-  'kuzemallu':{year:'2025',title:'Küzemallu (asunto de nieblas azules)',subtitle:'para cuarteto de cuerdas — Maurice Quartet · Distat Terra Festival',body:`<p><em>Küzemallu es la palabra mágica con el que el pueblo mapuche nombra a los objetos estelares de apariencia difusa.</em></p><p><em>Nebulosas, nieblas y neblinas azuladas que son un parte de ese misterioso río que llamamos vía lactea. Un río del que venimos, un río hacia el que vamos.</em></p><p>En base a textos de astrología sufí y mapuche. Estrenado en el Festival Distat Terra por el Maurice Quartet (Italia), en el contexto del Taller de Jóvenes Compositores impartido por Leandra Yulita.</p>`,credits:`<p>Violin 1: Georgia Privitera<br>Cello: Aline Privitera<br>Violin 2: Laura Bertolino<br>Viola: Francesco Vernero</p>`,links:[{label:'Escuchar en SoundCloud',url:'https://soundcloud.com/distat-festival/ada-gomiz-kuezemallu-asunto-de'},{label:'Programa oficial',url:'https://distatfestival.com/evento/concierto-del-taller-internacional-para-jovenes-compositores/'}]},
-  'bosque':{year:'2023/2024',title:'Bosque de Adas',subtitle:'para viola, contrabajo, vibráfono, percusión, cante y clarinete',body:`<p>Collages y transcreaciones para ensamble de cante, vientos, vibráfono, viola, contrabajo, guitarra y percusión.</p>`,credits:`<p>Luciano Slaibe — vibáfono y percusión<br>Felix Valen — viola<br>Lau Lovotti — contrabajo<br>Pablo Eguía — guitarra acústica<br>Ada Gomiz — voz, vientos, guitarra flamenca, percusión con objetos, composición e idea general</p>`,links:[{label:'Instagram',url:'https://www.instagram.com/reel/C2CsMy1OsVD/'}]},
-  'llamaban':{year:'2022',title:'Llamaban los Almúedanos',subtitle:'para cuarteto de cuerdas y performer',body:`<p>Composiciones y arreglos a partir de textos del libro <em>"Big Bang"</em> del poeta cubano Severo Sarduy, donde se enhebra música de aire flamenca, creaciones de música contemporanea, improvisación y performance.</p>`,credits:`<p>Violonchelo: Martin Devoto<br>Violín: Carlos Britez<br>Violín y contrabajo: Lau Lovotti<br>Viola: Felix Valen<br>Cante, vientos, performance, composición, visuales e idea general: Isis Urano * (Ada Gomiz)</p>`,links:[]},
-  'polyflux':{year:'2022',title:'Polyfluxaoboiotic',subtitle:'para ensamble vocal — Cartografía transvocal',body:`<p>Cartografía transvocal a partir de tres Galaxias (prosapoemas) del escritor brasileño Haroldo de Campos.</p><p>Escrito y experimentado durante el 2022 con y para el Ensamble Vocal Untref. Estrenado el 16 de septiembre en el ciclo Urondo Contemporaneo, curado por Marcelo Delgado.</p>`,credits:`<p>Agustín Toibero · Ada Gomiz · Alejandro Torres · Ariel Guissarri · Juan Martín Ancarola · Federico Valdez · Maiu Stella · Sabrina Beltrame · Virginia Jones · Sofía Dominguez · Valentina de Prado · Ailen Kowayk · Carlos Britez · Sergio Suarez · Suriel Tagliaferro<br><br>Dirección musical: Agustina Crespo, Juan Cerono<br>Dirección escénica: Manuela Mendez<br>Visuales: Barbara Velazque, Sebastian Simoneti, Marco Erijman</p>`,links:[{label:'Interzona 1',url:'https://www.youtube.com/watch?v=lW3OlPRykzo'},{label:'Interzona 2',url:'https://www.youtube.com/watch?v=9yoYXeK5pek'},{label:'Interzona 3',url:'https://www.youtube.com/watch?v=3EIN9UW-T3M'}]},
-  'purpur':{year:'2022',title:'Púrpur',subtitle:'para cello solo',body:`<p>Obra para violonchelo solista, interpretada por Martín Devoto. Elaborada como trabajo final de Instrumento 6 en la Licenciatura en Música de la UNTREF.</p><p>Se explora la relación entre poetica sonora y escritura musical analogica/tradicional. Estrenada el 4 de Agosto del 2022 en el Teatro De La Fábula.</p>`,credits:`<p>Violonchelo: Martín Devoto</p>`,links:[{label:'Programa (PDF)',url:'https://adagomiz.wordpress.com/wp-content/uploads/2023/04/programa-martin-devoto-en-la-fabula-final.pdf'}]},
-  'afuerigena':{year:'2021',title:'Afuerígena',subtitle:'livelooping · visuales generativas · recitado',body:`<p>Performance solista y unipersonal.</p><p>Un viaje donde interactúa el uso de los loops como amplificadores de texturas a través de diversos instrumentos (voz, clarinete, clarinete bajo, flauta, percusión, instrumentos no convencionales), en relación a textos de literatura neobarroca latinoamericana, arreglos de canciones de diversas musicas y estilos y visuales generativas en tiempo real.</p>`,credits:``,links:[]},
-  'laberinto':{year:'2020',title:'Laberinto Áureo',subtitle:'para recitantes, flauta traversa, clarinete, piano y percusión',body:`<div class="modal-blockquote"><p>"Eco… la curva del eco… el golpe súbito y profundo… con esa cosa de membrana chamánica pero al mismo tiempo de altura, de voz… arriba, abajo: todo está en un estado de psicopompía muy volátil y de golpe muy coagulante"</p><cite>Nakh Ab Ra</cite></div><div class="modal-blockquote"><p>"¡¡Tremendo viaGema subacuático, plurimononeumático!! Envolvimientos de un aquelarre (¡aquel arre!) íntimo, encaracolado en el limo del oído, en la cima de la neurona, en el sismo del pasmo aural. Sutileza y víscera. Monocordia y múltitextura. Todo a la vez."</p><cite>Juan Salzano</cite></div><p>Sonorización de dos poemas transbarrocos ("Principiava a encadenarse" de Haroldo de Campos y "No lumina luzbel" de Nestor Perlongher) — UNTREF, Taller de Creación Musical II.</p>`,credits:``,links:[{label:'Escuchar en Bandcamp',url:'https://adagomiz.bandcamp.com/track/laberinto-ureo'}]}
+  'dos-cisnes':{year:'2025',title:'Dos Cisnes Negros',
+    subtitle:'<span data-lang="es">para dos clarinetes bajos</span><span data-lang="en">for two bass clarinets</span>',
+    body:`<div data-lang="es"><p><em>Dos cisnes negros</em> evoca un ritual de pasaje entre mundos.</p><p>Siguiendo el sistema de analogías místicas del etnomusicólogo Marius Schneider, en diversas culturas antiguas el cisne negro representa el animal-símbolo de pasaje entre la vida y la muerte. Es una especie de cuidador entre el nacimiento y la finitud.</p><p>En esta obra, cada clarinete bajo representa un cisne negro. La estructura rítmica se construye a través de las proporciones numéricas de la seguiriya flamenca, palo que se canta en los funerales, conectado directamente con una energética de lo funerario.</p></div><div data-lang="en"><p><em>Two Black Swans</em> evokes a rite of passage between worlds.</p><p>Following the system of mystical analogies by ethnomusicologist Marius Schneider, in various ancient cultures the black swan represents the animal-symbol of passage between life and death — a kind of guardian between birth and finitude.</p><p>In this work, each bass clarinet represents a black swan. The rhythmic structure is built through the numerical proportions of the flamenco seguiriya, a form sung at funerals, directly connected to funerary energetics.</p></div><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/TBGQjCH24dM?si=fVdZArvP36vDut0b" title="Dos Cisnes Negros" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
+    credits:`<p>Premiered December 17th at Casa Brandon<br>Bass Clarinet 1: Federico Landaburu<br>Bass Clarinet 2: Lautaro Abrego</p>`,links:[]},
+
+  'hipnoidal':{year:'2025',title:'Hipnoidal',subtitle:'Butoh Dance · Shadow Theatre · Live Music',
+    body:`<div data-lang="es"><p>Hipnoidal es una obra interdisciplinaria que combina danza butoh, teatro de sombras y música en vivo, evocando un estado entre el sueño y la vigilia. Desde ese lugar intermedio, exploramos el asombro ante lo viviente, la conexión con territorios efímeros, fuerzas elementales y ese cuerpo que atraviesa memorias para ampliar lo que percibimos como mundo, como yo, como otrx.</p><p>A través de la relación primordial entre luz y oscuridad, las fronteras entre lo humano y lo no humano se difuminan, revelando matices en busca de sentidos que nos trascienden. Una obra para recordar los ciclos, las metamorfosis y la finitud de todos los organismos vivos. Un tributo por el tiempo que nos es dado.</p></div><div data-lang="en"><p>Hipnoidal is an interdisciplinary work combining butoh dance, shadow theater, and live music that evokes a state between dreams and wakefulness. From this in-between place, we seek to delve into the wonder of the living, exploring the connection with ephemeral territories, elemental forces and that body traversing memories to amplify what we perceive as world, as self, as other.</p><p>Through the primal relationship between light and darkness, the boundaries between the human and the non-human are blurred, revealing nuances in search of meanings that transcend us. A work to remember the cycles, metamorphosis, and finitude of all living organisms. A tribute for the time we are given.</p></div>`,
+    credits:`<p>Writting: Pierina Lategola<br>Co-direction: Pierina Lategola, Tatiana Zuccolotto & Ada Gomiz<br>Dancers: Pierina Lategola & Tatiana Zuccolotto<br>Music composition and sound performance: Ada Gomiz<br><br>— Premiere Aug 10: Kirsten Kjærs Museum, Denmark<br>— Aug 26: Spazio Mostro, Turin, Italy<br>— Aug 30: Slow Festival, Thisted, Denmark<br>— Sep 5: Art Week 36, North Jutland, Denmark</p>`,
+    links:[{label:'Web',url:'https://desterritorializ-ada.github.io/hipnoidal/'},{label:'Instagram',url:'https://www.instagram.com/p/DM7cB3Wo8RL/?img_index=1'}]},
+
+  'huella-winka':{year:'2025',title:'Huella Winka — Censored',
+    subtitle:'<span data-lang="es">para shakuhachi y field recordings</span><span data-lang="en">for shakuhachi and field recordings</span>',
+    body:`<div data-lang="es"><p>Composición sonora basada en grabaciones de campo, paisajes sonoros e improvisaciones en el sendero Huella Andina, Puelmapu, Argentina.</p><p>Se trata de una obra que dialoga entre lo mítico y la extinción, donde la improvisación vientística del shakuhachi, los recorridos en huella y las geofonías espesas se enhebran como territorios efímeros, configurando una cartografía sono-imaginal que resquebraja los contornos entre lo humano y un paisaje poblado de misterios.</p><p>Desarrollada en la cátedra Sonido, Paisaje y Territorio de la Maestría en Arte Sonoro de la Universidad Nacional de Tres de Febrero (UNTREF), la obra fue seleccionada para el workshop <em>The Enby Future Manifest</em> del Darmstadt Ferienkurse, donde sería montada como instalación en colaboración con artistas internacionales. Posteriormente, su presentación fue censurada por la Schader Stiftung debido a la inclusión de una cartografía visual que vinculaba el genocidio palestino con el genocidio del pueblo mapuche y el terricidio.</p><p>Un fragmento fue presentado con la performer colombo-palestina Ana Dueri el 2 de agosto en la Orangerie, gracias a la solidaridad de Bill Dietz.</p></div><div data-lang="en"><p>A sound composition based on field recordings, soundscapes and improvisations along the Huella Andina trail, Puelmapu, Argentina.</p><p>The work opens a dialogue between the mythic and extinction, where the wind-breath improvisation of the shakuhachi, the trail walks and dense geophonies are threaded together as ephemeral territories, shaping a sonic-imaginal cartography that fractures the contours between the human and a landscape populated with mysteries.</p><p>Developed in the Sound, Landscape and Territory seminar of the Master's Program in Sound Art at UNTREF, the work was selected for the workshop <em>The Enby Future Manifest</em> at the Darmstadt Ferienkurse, where it was to be staged as an installation in collaboration with international artists. Its presentation was subsequently censored by the Schader Stiftung due to the inclusion of a visual cartography linking the Palestinian genocide with the genocide of the Mapuche people and terracide.</p><p>A fragment was presented with the Colombian-Palestinian performer Ana Dueri on August 2nd at the Orangerie, thanks to the solidarity of Bill Dietz.</p></div>`,
+    credits:``,links:[{label:'Ver / View performance',url:'https://adagomiz.notion.site/huella-winka-orangerie'},{label:'Petición / Petition',url:'https://www.change.org/p/petition-against-censorship-at-the-2025-darmst%C3%A4dter-ferienkurse'},{label:'Carta abierta al IMD',url:'https://adagomiz.wordpress.com/open-letter-to-the-imd/'},{label:'Open Letter — Fredrika Gullfot',url:'https://www.linkedin.com/pulse/open-letter-response-statements-city-darmstadt-schader-gullfot-x4rpf'},{label:'Marco Momi — Kranichsteiner Musikpreis',url:'https://www.marcomomi.com/Public/News/Le_News/On_the_Return_of_the_2008_Kranichsteiner_Musikpreis.htm'}]},
+
+  'kuzemallu':{year:'2025',title:'Küzemallu (asunto de nieblas azules)',
+    subtitle:'<span data-lang="es">para cuarteto de cuerdas — Maurice Quartet · Distat Terra Festival</span><span data-lang="en">for string quartet — Maurice Quartet · Distat Terra Festival</span>',
+    body:`<div data-lang="es"><p><em>Küzemallu es la palabra mágica con la que el pueblo mapuche nombra a los objetos estelares de apariencia difusa.</em></p><p><em>Nebulosas, nieblas y neblinas azuladas que son parte de ese misterioso río que llamamos vía láctea. Un río del que venimos, un río hacia el que vamos.</em></p><p>En base a textos de astrología sufí y mapuche. Estrenado en el Festival Distat Terra por el Maurice Quartet (Italia), en el contexto del Taller de Jóvenes Compositores impartido por Leandra Yulita.</p></div><div data-lang="en"><p><em>Küzemallu is the magical word with which the Mapuche people name stellar objects of diffuse appearance.</em></p><p><em>Nebulae, fogs and bluish hazes that are part of that mysterious river we call the Milky Way. A river we come from, a river toward which we go.</em></p><p>Based on texts from Sufi and Mapuche astrology. Premiered at the Distat Terra Festival by the Maurice Quartet (Italy), in the context of the Young Composers Workshop taught by Leandra Yulita.</p></div>`,
+    credits:`<p>Violin 1: Georgia Privitera<br>Cello: Aline Privitera<br>Violin 2: Laura Bertolino<br>Viola: Francesco Vernero</p>`,
+    links:[{label:'Escuchar en SoundCloud',url:'https://soundcloud.com/distat-festival/ada-gomiz-kuezemallu-asunto-de'},{label:'Programa oficial',url:'https://distatfestival.com/evento/concierto-del-taller-internacional-para-jovenes-compositores/'}]},
+
+  'bosque':{year:'2023/2024',title:'Bosque de Adas',
+    subtitle:'<span data-lang="es">para viola, contrabajo, vibráfono, percusión, cante y clarinete</span><span data-lang="en">for viola, double bass, vibraphone, percussion, singing and clarinet</span>',
+    body:`<div data-lang="es"><p>Collages y transcreaciones para ensamble de cante, vientos, vibráfono, viola, contrabajo, guitarra y percusión.</p></div><div data-lang="en"><p>Collages and transcreations for an ensemble of singing, winds, vibraphone, viola, double bass, guitar and percussion.</p></div>`,
+    credits:`<p>Luciano Slaibe — vibráfono y percusión<br>Felix Valen — viola<br>Lau Lovotti — contrabajo<br>Pablo Eguía — guitarra acústica<br>Ada Gomiz — voz, vientos, guitarra flamenca, percusión con objetos, composición e idea general</p>`,
+    links:[{label:'Instagram',url:'https://www.instagram.com/reel/C2CsMy1OsVD/'}]},
+
+  'llamaban':{year:'2022',title:'Llamaban los Almúedanos',
+    subtitle:'<span data-lang="es">para cuarteto de cuerdas y performer</span><span data-lang="en">for string quartet and performer</span>',
+    body:`<div data-lang="es"><p>Composiciones y arreglos a partir de textos del libro <em>"Big Bang"</em> del poeta cubano Severo Sarduy, donde se enhebra música de aire flamenca, creaciones de música contemporánea, improvisación y performance.</p></div><div data-lang="en"><p>Compositions and arrangements based on texts from the book <em>"Big Bang"</em> by Cuban poet Severo Sarduy, weaving together flamenco-inflected music, contemporary music compositions, improvisation and performance.</p></div><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/LvhH84bGk8c?si=hL2cM0M8PdGpmxXu" title="Llamaban los Almúedanos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
+    credits:`<p>Violonchelo: Martin Devoto<br>Violín: Carlos Britez<br>Violín y contrabajo: Lau Lovotti<br>Viola: Felix Valen<br>Cante, vientos, performance, composición, visuales e idea general: Isis Urano * (Ada Gomiz)</p>`,
+    links:[]},
+
+  'polyflux':{year:'2022',title:'Polyfluxaoboiotic',
+    subtitle:'<span data-lang="es">para ensamble vocal — Cartografía transvocal</span><span data-lang="en">for vocal ensemble — Transvocal Cartography</span>',
+    body:`<div data-lang="es"><p>Cartografía transvocal a partir de tres Galaxias (prosapoemas) del escritor brasileño Haroldo de Campos.</p><p>Escrito y experimentado durante el 2022 con y para el Ensamble Vocal UNTREF. Estrenado el 16 de septiembre en el ciclo Urondo Contemporáneo, curado por Marcelo Delgado.</p></div><div data-lang="en"><p>Transvocal cartography based on three Galaxias (prose-poems) by Brazilian writer Haroldo de Campos.</p><p>Written and developed during 2022 with and for the UNTREF Vocal Ensemble. Premiered on September 16th at the Urondo Contemporáneo cycle, curated by Marcelo Delgado.</p></div><div class="modal-video-tabs" id="polyflux-tabs"><button class="modal-video-tab active" onclick="switchPolyfluxTab(0)">Interzona 1</button><button class="modal-video-tab" onclick="switchPolyfluxTab(1)">Interzona 2</button><button class="modal-video-tab" onclick="switchPolyfluxTab(2)">Interzona 3</button></div><div class="modal-video-panel active" id="pf-panel-0"><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/lW3OlPRykzo?si=Ui2IJ7iebnMq0nBN" title="Polyfluxaoboiotic Interzona 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div><div class="modal-video-panel" id="pf-panel-1"><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/9yoYXeK5pek?si=q6e_CPLDb7g9NYtg" title="Polyfluxaoboiotic Interzona 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div><div class="modal-video-panel" id="pf-panel-2"><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/3EIN9UW-T3M?si=z4pZh9jWQ3EWcJ9W" title="Polyfluxaoboiotic Interzona 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>`,
+    credits:`<p>Agustín Toibero · Ada Gomiz · Alejandro Torres · Ariel Guissarri · Juan Martín Ancarola · Federico Valdez · Maiu Stella · Sabrina Beltrame · Virginia Jones · Sofía Dominguez · Valentina de Prado · Ailen Kowayk · Carlos Britez · Sergio Suarez · Suriel Tagliaferro<br><br>Dirección musical: Agustina Crespo, Juan Cerono<br>Dirección escénica: Manuela Mendez<br>Visuales: Barbara Velazque, Sebastian Simoneti, Marco Erijman</p>`,
+    links:[]},
+
+  'purpur':{year:'2022',title:'Púrpur',
+    subtitle:'<span data-lang="es">para cello solo</span><span data-lang="en">for solo cello</span>',
+    body:`<div data-lang="es"><p>Obra para violonchelo solista, interpretada por Martín Devoto. Elaborada como trabajo final de Instrumento 6 en la Licenciatura en Música de la UNTREF.</p><p>Se explora la relación entre poética sonora y escritura musical analógica/tradicional. Estrenada el 4 de agosto del 2022 en el Teatro De La Fábula.</p></div><div data-lang="en"><p>Work for solo cello, performed by Martín Devoto. Created as a final project for Instrument 6 in the Music degree at UNTREF.</p><p>It explores the relationship between sonic poetics and traditional/analog musical notation. Premiered on August 4th, 2022 at Teatro De La Fábula.</p></div><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/GcztMyZNC8w?si=gwqV27AZPwKimWvu" title="Púrpur" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
+    credits:`<p>Violonchelo: Martín Devoto</p>`,
+    links:[{label:'Programa (PDF)',url:'https://adagomiz.wordpress.com/wp-content/uploads/2023/04/programa-martin-devoto-en-la-fabula-final.pdf'}]},
+
+  'afuerigena':{year:'2021',title:'Afuerígena',subtitle:'livelooping · visuales generativas · recitado',
+    body:`<div data-lang="es"><p>Performance solista y unipersonal.</p><p>Un viaje donde interactúa el uso de los loops como amplificadores de texturas a través de diversos instrumentos (voz, clarinete, clarinete bajo, flauta, percusión, instrumentos no convencionales), en relación a textos de literatura neobarroca latinoamericana, arreglos de canciones de diversas músicas y estilos y visuales generativas en tiempo real.</p></div><div data-lang="en"><p>Solo and one-person performance.</p><p>A journey where loops interact as texture amplifiers through various instruments (voice, clarinet, bass clarinet, flute, percussion, unconventional instruments), in relation to texts from Latin American neo-baroque literature, arrangements of songs from various musical styles, and real-time generative visuals.</p></div><div class="modal-video-wrap"><iframe src="https://www.youtube.com/embed/irdQdJ-5iX0?si=fMcGsUr7p9RfOAqz" title="Afuerígena" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`,
+    credits:``,links:[]},
+
+  'laberinto':{year:'2020',title:'Laberinto Áureo',
+    subtitle:'<span data-lang="es">para recitantes, flauta traversa, clarinete, piano y percusión</span><span data-lang="en">for speakers, flute, clarinet, piano and percussion</span>',
+    body:`<div data-lang="es"><div class="modal-blockquote"><p>"Eco… la curva del eco… el golpe súbito y profundo… con esa cosa de membrana chamánica pero al mismo tiempo de altura, de voz… arriba, abajo: todo está en un estado de Psicopompía muy volátil y de golpe muy coagulante, así es la sensación de que no solo hay un paneo en el sentido horizontal del término, si no también una circulación Terrestre, Celeste, en el sentido hechícero y vertical"</p><cite>Nakar Ellif Ce | Poeta, alquimista y performer</cite></div><p><em>"Laberinto Áureo"</em> es una composición en base a dos poemas neobarrocos latinoamericanos (<em>"Principiava a encadenarse"</em> de Haroldo de Campos y <em>"No lumina luzbel"</em> de Nestor Perlongher).</p><p>Es un recitado sonoro que trabaja en la inmersión intermedial entre palabra y material sonoro, indeterminando su significado semántico textual, abriéndolo hacia un plano de consistencia de imágenes abstractas, difusas, laberínticas, volátiles. Un torbellino circular acentrado y transcursivo, magma sonoro que se difumina hacia el silencio.</p></div><div data-lang="en"><div class="modal-blockquote"><p>"Echo… the curve of the echo… the sudden and deep strike… with that thing of a shamanic membrane but at the same time of height, of voice… up, down: everything is in a state of Psychopompy very volatile and suddenly very coagulating — thus the feeling that there is not only a panning in the horizontal sense of the term, but also a Terrestrial, Celestial circulation, in the sorcerous and vertical sense"</p><cite>Nakar Ellif Ce | Poet, alchemist and performer</cite></div><p><em>"Laberinto Áureo"</em> is a composition based on two Latin American neo-baroque poems (<em>"Principiava a encadenarse"</em> by Haroldo de Campos and <em>"No lumina luzbel"</em> by Nestor Perlongher).</p><p>It is a sonic recitation that works in intermedial immersion between word and sonic material, indetermining its textual semantic meaning, opening it toward a plane of consistency of abstract, diffuse, labyrinthine, volatile images. A centerless and transcursive circular vortex, sonic magma that dissolves toward silence.</p></div>`,
+    credits:``,links:[{label:'Escuchar en Bandcamp',url:'https://adagomiz.bandcamp.com/track/laberinto-ureo'}]}
 };
 
 function openWork(id){
-  const w=works[id];if(!w)return;
+  const w=works[id]; if(!w) return;
   const imgClass=isScore(id)?'modal-hero-img score':'modal-hero-img';
   let html=`<img src="${WORK_IMGS[id]}" class="${imgClass}" alt="${w.title}">
   <div class="modal-year">${w.year}</div>
@@ -565,71 +555,68 @@ function openWork(id){
   <p class="modal-subtitle">${w.subtitle}</p>
   <div class="modal-divider"></div>
   <div class="modal-body">${w.body}</div>`;
-  if(w.credits)html+=`<div class="modal-credits">${w.credits}</div>`;
+  if(w.credits) html+=`<div class="modal-credits">${w.credits}</div>`;
   const scoreIds=['dos-cisnes','kuzemallu','bosque','llamaban','polyflux','purpur'];
   let linksHtml='';
-  if(scoreIds.includes(id)) linksHtml+=`<a href="#" onclick="closeModal();setTimeout(()=>openScore('${id}'),80);return false;" class="modal-link">ver partitura</a>`;
+  if(scoreIds.includes(id)) linksHtml+=`<a href="#" onclick="closeModal();setTimeout(()=>openScore('${id}'),80);return false;" class="modal-link"><span data-lang="es">ver partitura</span><span data-lang="en">view score</span></a>`;
   if(w.links&&w.links.length) w.links.forEach(l=>linksHtml+=`<a href="${l.url}" target="_blank" class="modal-link">${l.label}</a>`);
   if(linksHtml) html+=`<div class="modal-links">${linksHtml}</div>`;
   document.getElementById('modal-content').innerHTML=html;
+  // apply current language inside modal
+  document.getElementById('modal-content').querySelectorAll('[data-lang]').forEach(el=>{
+    el.style.display=el.dataset.lang===lang?(el.tagName==='SPAN'?'inline':'block'):'none';
+  });
   document.getElementById('work-modal').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeModal(){document.getElementById('work-modal').classList.remove('open');
- document.body.style.overflow='';
+function closeModal(){document.getElementById('work-modal').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('work-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+function switchPolyfluxTab(i){
+  document.querySelectorAll('.modal-video-tab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  document.querySelectorAll('.modal-video-panel').forEach((p,idx)=>p.classList.toggle('active',idx===i));
 }
-document.getElementById('work-modal').addEventListener('click',function(e){
-  if(e.target===this)closeModal();
-});
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape')closeModal();
-});
 </script>
 
 <!-- Score viewer via Google Docs -->
 <script>
 (function(){
-  var BASE = 'https://archive.org/download/scores_ada_gomiz_2026/';
-  window.SCORE_FILES = {
-    'dos-cisnes': [{label:'Dos Cisnes Negros', file:BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}],
-    'kuzemallu':  [{label:'Küzemallu',         file:BASE+'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}],
-    'bosque': [
-      {label:'Fandanguillos', file:BASE+'scores/fandanguillos_2025.pdf'},
-      {label:'Nana Sombría',  file:BASE+'scores/nana_sombria_2025.pdf'},
-      {label:'Bulerías',      file:BASE+'scores/bulerias_2025.pdf'}
+  var BASE='https://archive.org/download/scores_ada_gomiz_2026/';
+  window.SCORE_FILES={
+    'dos-cisnes':[{label:'Dos Cisnes Negros',file:BASE+'scores/GOMIZ_Dos_Cisnes_Negros_for_Bass_Clarinet_Duo.pdf'}],
+    'kuzemallu': [{label:'Küzemallu',        file:BASE+'scores/GOMIZ_Ku_zemallu_for_String_Quartet.pdf'}],
+    'bosque':[
+      {label:'Fandanguillos',file:BASE+'scores/fandanguillos_2025.pdf'},
+      {label:'Nana Sombría', file:BASE+'scores/nana_sombria_2025.pdf'},
+      {label:'Bulerías',     file:BASE+'scores/bulerias_2025.pdf'}
     ],
-    'llamaban': [{label:'Polígonos',         file:BASE+'scores/poligonos_ada_gomiz.pdf'}],
-    'polyflux': [{label:'Polyfluxaoboiotic', file:BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}],
-    'purpur':   [{label:'Púrpur',            file:BASE+'scores/purpur_ada_gomiz.pdf'}]
+    'llamaban':[{label:'Polígonos',        file:BASE+'scores/poligonos_ada_gomiz.pdf'}],
+    'polyflux':[{label:'Polyfluxaoboiotic',file:BASE+'scores/Polyfluxaoboiotic_Ada_Gomiz.pdf'}],
+    'purpur':  [{label:'Púrpur',           file:BASE+'scores/purpur_ada_gomiz.pdf'}]
   };
-
-  function loadScore(pdfUrl) {
-    var loading = document.getElementById('score-loading');
-    var frame   = document.getElementById('pdf-frame');
-    loading.style.display = 'flex';
-    frame.style.display   = 'none';
-    var viewer = 'https://docs.google.com/viewer?url=' + encodeURIComponent(pdfUrl) + '&embedded=true';
-    frame.onload = function(){ loading.style.display='none'; frame.style.display='block'; };
-    frame.src = viewer;
+  function loadScore(pdfUrl){
+    var loading=document.getElementById('score-loading'),frame=document.getElementById('pdf-frame');
+    loading.style.display='flex'; frame.style.display='none';
+    frame.onload=function(){loading.style.display='none';frame.style.display='block';};
+    frame.src='https://docs.google.com/viewer?url='+encodeURIComponent(pdfUrl)+'&embedded=true';
   }
-
-  window.openScore = function(workId) {
-    var files = window.SCORE_FILES[workId];
-    if (!files||!files.length) return;
-    var modal   = document.getElementById('score-modal');
-    var titleEl = document.getElementById('score-modal-title');
-    var btnsEl  = document.getElementById('score-file-btns');
-    var w = works[workId];
-    titleEl.textContent = (w ? w.title : workId) + ' — partitura';
-    btnsEl.innerHTML = '';
-    if (files.length > 1) {
+  window.openScore=function(workId){
+    var files=window.SCORE_FILES[workId]; if(!files||!files.length) return;
+    var modal=document.getElementById('score-modal');
+    var titleEl=document.getElementById('score-modal-title');
+    var btnsEl=document.getElementById('score-file-btns');
+    var w=works[workId];
+    titleEl.textContent=(w?w.title:workId)+' — partitura';
+    btnsEl.innerHTML='';
+    if(files.length>1){
       files.forEach(function(f,i){
-        var a = document.createElement('a');
+        var a=document.createElement('a');
         a.href='#'; a.textContent=f.label; a.className='modal-link';
-        if(i===0){ a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)'; }
-        a.onclick = function(e){
+        if(i===0){a.style.background='rgba(75,191,174,.12)';a.style.borderColor='var(--tq-light)';}
+        a.onclick=function(e){
           e.preventDefault();
-          btnsEl.querySelectorAll('a').forEach(function(b){ b.style.background=''; b.style.borderColor=''; });
+          btnsEl.querySelectorAll('a').forEach(function(b){b.style.background='';b.style.borderColor='';});
           a.style.background='rgba(75,191,174,.12)'; a.style.borderColor='var(--tq-light)';
           loadScore(f.file);
         };
@@ -637,25 +624,21 @@ document.addEventListener('keydown',function(e){
       });
     }
     modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow='hidden';
     loadScore(files[0].file);
   };
-
-  window.closeScoreModal = function(){
+  window.closeScoreModal=function(){
     document.getElementById('score-modal').classList.remove('open');
-    document.body.style.overflow = '';
-    var frame = document.getElementById('pdf-frame');
-    frame.src = ''; frame.style.display = 'none';
-    document.getElementById('score-loading').style.display = 'flex';
+    document.body.style.overflow='';
+    var frame=document.getElementById('pdf-frame');
+    frame.src=''; frame.style.display='none';
+    document.getElementById('score-loading').style.display='flex';
   };
-
-  document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('score-modal').addEventListener('click', function(e){
-      if(e.target===this) closeScoreModal();
-    });
+  document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('score-modal').addEventListener('click',function(e){if(e.target===this)closeScoreModal();});
   });
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape' && document.getElementById('score-modal').classList.contains('open')) closeScoreModal();
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&document.getElementById('score-modal').classList.contains('open'))closeScoreModal();
   });
 })();
 </script>
