@@ -216,7 +216,7 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
 .crowd-budget .row-total td{border-top:1px solid rgba(192,53,122,.22);border-bottom:none;color:var(--tq-foam);padding-top:1rem;font-size:.84rem;}
 .crowd-budget .row-total td:last-child{color:var(--tq-foam);font-size:.7rem;letter-spacing:.18em;}
 .crowd-field{margin-bottom:1.2rem;display:flex;flex-direction:column;gap:.3rem;}
-.crowd-field label{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.55rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-light);}
+.crowd-field label{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.55rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-mid);}
 .crowd-field input,.crowd-field textarea{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;background:transparent;border:none;border-bottom:1px solid rgba(192,53,122,.18);padding:.5rem 0 .55rem;color:var(--tq-foam);outline:none;width:100%;transition:border-color .25s;-webkit-appearance:none;border-radius:0;}
 .crowd-field input:focus,.crowd-field textarea:focus{border-bottom-color:var(--tq-light);}
 .crowd-field input::placeholder,.crowd-field textarea::placeholder{color:rgba(212,168,204,.2);}
@@ -250,6 +250,51 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
 @media(max-width:900px){.crowd-lower{grid-template-columns:1fr;}.crowd-col-sticky{position:static;}.crowd-pay-btns{grid-template-columns:1fr;}}
 .crowd-link{color:var(--tq-light);text-decoration:none;border-bottom:1px solid rgba(192,53,122,.35);transition:border-color .3s,color .3s;}
 .crowd-link:hover{color:var(--tq-foam);border-bottom-color:var(--tq-light);}
+
+
+/* ── DONATION WIDGET ─────────────────────────────────────────────────── */
+.don-steps{display:flex;align-items:center;gap:0;margin-bottom:.4rem;}
+.don-step{width:28px;height:28px;border-radius:50%;border:1px solid rgba(192,53,122,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .35s;}
+.don-step span{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.05em;color:var(--tq-pale);opacity:.5;}
+.don-step.active{border-color:var(--tq-light);background:rgba(192,53,122,.15);}
+.don-step.active span{color:var(--tq-foam);opacity:1;}
+.don-step.done{border-color:var(--gold);background:rgba(212,168,58,.12);}
+.don-step.done span{color:var(--gold);opacity:1;}
+.don-step-line{flex:1;height:1px;background:rgba(192,53,122,.2);}
+.don-step-labels{display:flex;justify-content:space-between;margin-bottom:2rem;}
+.don-step-labels span{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--tq-pale);opacity:.5;text-align:center;flex:1;}
+.don-panel-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-foam);margin-bottom:1.4rem;}
+.don-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.don-method-btn{display:flex;flex-direction:column;align-items:flex-start;padding:1rem 1.1rem;border:1px solid rgba(192,53,122,.2);background:rgba(21,13,46,.6);cursor:none;transition:all .3s;text-align:left;}
+.don-method-btn:hover{border-color:var(--tq-light);background:rgba(192,53,122,.1);}
+.don-method-icon{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);margin-bottom:.3rem;line-height:1;}
+.don-method-name{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.68rem;font-weight:400;letter-spacing:.1em;color:var(--tq-foam);margin-bottom:.2rem;}
+.don-method-sub{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:300;color:var(--tq-pale);line-height:1.4;}
+.don-back-btn{display:flex;align-items:center;gap:.4rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tq-pale);background:none;border:none;cursor:none;padding:0;margin-bottom:1.4rem;opacity:.65;transition:opacity .3s;}
+.don-back-btn:hover{opacity:1;color:var(--tq-foam);}
+.don-info-text{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.82rem;font-weight:300;line-height:1.8;color:var(--tq-foam);margin-bottom:1.4rem;}
+.don-bank-table{border:1px solid rgba(192,53,122,.18);margin-bottom:1.4rem;}
+.don-bank-row{display:flex;justify-content:space-between;align-items:baseline;padding:.65rem .9rem;border-bottom:1px solid rgba(192,53,122,.1);}
+.don-bank-row:last-child{border-bottom:none;}
+.don-bank-label{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--tq-foam);flex-shrink:0;margin-right:1rem;}
+.don-bank-value{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:var(--tq-foam);text-align:right;}
+.don-bank-mono{font-family:'Pangram','Inter',Helvetica,sans-serif;font-style:normal;font-size:.72rem;letter-spacing:.08em;color:var(--tq-foam);}
+.don-bank-ref{color:var(--gold);font-style:normal;}
+.don-hint{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.75rem;font-weight:300;line-height:1.7;color:var(--tq-foam);margin-bottom:1rem;border-left:2px solid rgba(212,168,58,.4);padding-left:1rem;}
+.don-next-btn,.don-submit-btn{width:100%;padding:1rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--tq-foam);border:1px solid rgba(192,53,122,.5);background:rgba(192,53,122,.1);cursor:none;transition:all .35s;margin-top:.4rem;}
+.don-next-btn:hover,.don-submit-btn:hover{background:rgba(192,53,122,.22);border-color:var(--tq-light);}
+.don-action-btn{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:1rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.62rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--tq-foam);border:1px solid rgba(192,53,122,.5);background:rgba(192,53,122,.1);text-decoration:none;transition:all .35s;margin-bottom:1rem;}
+.don-action-btn:hover{background:rgba(192,53,122,.22);border-color:var(--tq-light);}
+.don-field{margin-bottom:1rem;}
+.don-field-label{display:block;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--tq-foam);margin-bottom:.4rem;}
+.don-field-hint{font-weight:300;text-transform:none;letter-spacing:0;font-size:.65rem;color:var(--tq-pale);font-family:'Cormorant Garamond',serif;font-style:italic;}
+.don-input{width:100%;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;background:rgba(21,13,46,.7);border:1px solid rgba(192,53,122,.25);border-radius:0;padding:.6rem .8rem;color:var(--tq-foam);outline:none;transition:border-color .25s;-webkit-appearance:none;}
+.don-input:focus{border-color:var(--tq-light);}
+.don-input::placeholder{color:rgba(212,168,204,.3);}
+.don-textarea{resize:none;height:56px;line-height:1.6;}
+.don-thanks{text-align:center;padding:2rem 0;}
+.don-thanks-icon{font-size:2rem;color:var(--gold);margin-bottom:1rem;display:block;}
+.don-thanks-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:1.1rem;font-weight:200;color:var(--tq-foam);margin-bottom:.8rem;letter-spacing:.05em;}
 
 </style>
 </head>
@@ -403,7 +448,7 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
     </div>
   </div>
 
-<div class="crowd-video-wrap reveal">
+  <div class="crowd-video-wrap reveal">
   <iframe 
     src="https://www.youtube.com/embed/pW-aDf8wPZQ?rel=0"
     title="Ada Gomiz — Crowdfunding 2026"
@@ -415,7 +460,7 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
   <div class="crowd-body reveal">
     <div data-lang="es">
       <p class="crowd-section-label">Quien soy</p>
-      <p>Me llamo Ada Gomiz. Soy compositora, artista sonora y performer de Buenos Aires, Argentina. Estoy finalizando la Licenciatura en Musica en la Universidad Nacional de Tres de Febrero y hace ya varios anos que me focalizo en la composicion de música de camara contemporanea: escribir partituras para que ensambles las estrenen e interpreten.</p>
+      <p>Me llamo Ada Gomiz. Soy compositora, artista sonora y performer de Buenos Aires, Argentina. Estoy finalizando la Licenciatura en Musica en la Universidad Nacional de Tres de Febrero y hace ya varios anos que me focalizo en la composicion de musica de camara contemporanea: escribir partituras para que ensambles las estrenen e interpreten.</p>
 
       <p class="crowd-section-label">Para que es esta colecta</p>
       <p>Esta colecta existe para financiar mi viaje a dos festivales internacionales de musica contemporanea a los que fui seleccionada este ano: el <a href="https://www.takensemble.com/tak-lab" target="_blank" class="crowd-link">TAK LAB</a> en Nueva York, Estados Unidos, y el <a href="https://sites.google.com/view/foresty-festival-eng/" target="_blank" class="crowd-link">Foresty Festival</a> en Piamonte, Italia. Son dos instancias que ocurren el mismo verano y que, de poder realizarse, representarian el momento de mayor proyeccion internacional de mi carrera hasta ahora.</p>
@@ -426,8 +471,8 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
       <p class="crowd-section-label">Lo que esta en juego</p>
       <p>Ambos festivales no son instancias de formacion aisladas: son espacios de encuentro real, circulacion internacional y construccion de redes artisticas que desde Argentina son muy dificiles de sostener. Dejar pasar esta oportunidad implicaria postergar anos de desarrollo artistico y profesional.</p>
 
-      <p class="crowd-section-label">En relacion a mi economia y por que recurro a esta campaña</p>
-      <p>Como artista trans y sudamericana en Argentina he sostenido toda mi trayectoria de forma independiente: sin subsidios, sin respaldo institucional, trabajando y componiendo a la vez. Pero entre la crisis economica argentina, el vaciamiento por parte del actual gobierno de ultra-derecha de todos los sistemas de becas y apoyos para artistas, y el costo real de los viajes internacionales, no alcanza. Hoy casi no existen estructuras institucionales que acompanen estos procesos y por ello recurro a una financiacion colectiva y solidaria.</p>
+      <p class="crowd-section-label">En relacion a mi economia y por que recurro a esta campana</p>
+      <p>Como artista trans y sudamericana en Argentina he sostenido toda mi trayectoria de forma independiente: sin subsidios, sin respaldo institucional, trabajando y componiendo a la vez. Pero entre la crisis economica argentina, el vaciamiento por parte del actual gobierno de ultra-derecha de todos los sistemas de becas y apoyos para artistas, y el costo real de los viajes internacionales, no alcanza. Hoy no existen estructuras institucionales que acompanen estos procesos y por ello recurro a una financiacion colectiva y solidaria.</p>
       <p>Cada aporte hace posible el viaje. Cada ayuda es una forma concreta de que estas musicas -- nacidas en el sur -- puedan expandirse y sonar en nuevos territorios. Y si no podes donar, compartir este link a personas que creas que puedan aportar tambien es un enorme regalo.</p>
 
       <span class="crowd-firma">Gracias por leer hasta aqui y por considerar apoyarme. -- Ada</span>
@@ -535,79 +580,156 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
       </div>
     </div>
 
+<!-- ══ DONATION WIDGET ══════════════════════════════════════════════════ -->
     <div class="crowd-col-sticky reveal">
-      <div class="crowd-success" id="crowd-success">
-        <span class="crowd-success-paypal" data-lang="es">Gracias! En un momento te lleva a PayPal.</span>
-        <span class="crowd-success-paypal" data-lang="en">Thank you! Redirecting to PayPal.</span>
-        <span class="crowd-success-bank" data-lang="es">Gracias! Aqui abajo estan los datos de transferencia.</span>
-        <span class="crowd-success-bank" data-lang="en">Thank you! The transfer details are below.</span>
+
+      <!-- STEP INDICATOR -->
+      <div class="don-steps" id="don-steps">
+        <div class="don-step active" id="don-step-dot-1"><span>1</span></div>
+        <div class="don-step-line"></div>
+        <div class="don-step" id="don-step-dot-2"><span>2</span></div>
+        <div class="don-step-line"></div>
+        <div class="don-step" id="don-step-dot-3"><span>3</span></div>
       </div>
-      <form id="crowd-form" onsubmit="crowdSubmit(event)">
-        <div class="sec-label" style="margin-bottom:1.4rem;">
-          <span data-lang="es">Deja tu aporte</span>
-          <span data-lang="en">Leave your contribution</span>
-        </div>
-        <div class="crowd-field">
-          <label><span data-lang="es">Nombre (o "Anonimo" si preferis)</span><span data-lang="en">Name (or "Anonymous" if you prefer)</span></label>
-          <input type="text" id="cf-name" placeholder="Ada" autocomplete="given-name">
-        </div>
-        <div class="crowd-field">
-          <label>Email <span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;letter-spacing:0;text-transform:none;font-size:.75rem;color:var(--tq-mid);"><span data-lang="es">confidencial, no se comparte</span><span data-lang="en">confidential, never shared</span></span></label>
-          <input type="email" id="cf-email" placeholder="ada@mail.com" autocomplete="email">
-        </div>
-        <div class="crowd-field">
-          <label><span data-lang="es">Monto aproximado (USD)</span><span data-lang="en">Approximate amount (USD)</span></label>
-          <input type="number" id="cf-amount" placeholder="15" min="1" required>
-        </div>
-        <div class="crowd-field">
-          <label><span data-lang="es">Mensaje (opcional)</span><span data-lang="en">Message (optional)</span></label>
-          <textarea id="cf-msg" placeholder="..."></textarea>
-        </div>
-        <div class="crowd-pay-btns">
-          <button type="submit" class="crowd-pay-btn primary" onclick="crowdTarget='paypal'">
-            <span class="crowd-pay-name">PayPal</span>
-            <span class="crowd-pay-sub"><span data-lang="es">Internacional USD</span><span data-lang="en">International USD</span></span>
+      <div class="don-step-labels">
+        <span data-lang="es">Elegir metodo</span><span data-lang="en">Choose method</span>
+        <span data-lang="es">Realizar pago</span><span data-lang="en">Make payment</span>
+        <span data-lang="es">Confirmar</span><span data-lang="en">Confirm</span>
+      </div>
+
+      <!-- STEP 1: Choose payment method -->
+      <div class="don-panel" id="don-panel-1">
+        <p class="don-panel-title"><span data-lang="es">Como queres colaborar?</span><span data-lang="en">How would you like to contribute?</span></p>
+        <div class="don-method-grid">
+          <button class="don-method-btn" onclick="donSelectMethod('paypal')">
+            <span class="don-method-icon">P</span>
+            <span class="don-method-name">PayPal</span>
+            <span class="don-method-sub"><span data-lang="es">USD, tarjeta internacional</span><span data-lang="en">USD, international card</span></span>
           </button>
-          <button type="button" class="crowd-pay-btn" onclick="crowdShowBank('eur')">
-            <span class="crowd-pay-name">Transferencia EUR</span>
-            <span class="crowd-pay-sub"><span data-lang="es">Cuenta europea</span><span data-lang="en">European account</span></span>
+          <button class="don-method-btn" onclick="donSelectMethod('eur')">
+            <span class="don-method-icon">€</span>
+            <span class="don-method-name"><span data-lang="es">Transferencia</span><span data-lang="en">Transfer</span> EUR</span>
+            <span class="don-method-sub"><span data-lang="es">Cuenta europea</span><span data-lang="en">European account</span></span>
           </button>
-          <button type="button" class="crowd-pay-btn" onclick="crowdShowBank('ars')">
-            <span class="crowd-pay-name">Transferencia ARS</span>
-            <span class="crowd-pay-sub"><span data-lang="es">Cuenta arg pesos</span><span data-lang="en">Arg account pesos</span></span>
+          <button class="don-method-btn" onclick="donSelectMethod('ars')">
+            <span class="don-method-icon">$</span>
+            <span class="don-method-name"><span data-lang="es">Transferencia</span><span data-lang="en">Transfer</span> ARS</span>
+            <span class="don-method-sub"><span data-lang="es">Pesos argentinos</span><span data-lang="en">Argentine pesos</span></span>
           </button>
-          <button type="button" class="crowd-pay-btn" onclick="crowdShowBank('usd-arg')">
-            <span class="crowd-pay-name">Transferencia USD</span>
-            <span class="crowd-pay-sub"><span data-lang="es">Cuenta arg dolares</span><span data-lang="en">Arg account USD</span></span>
+          <button class="don-method-btn" onclick="donSelectMethod('usd-arg')">
+            <span class="don-method-icon">U</span>
+            <span class="don-method-name"><span data-lang="es">Transferencia</span><span data-lang="en">Transfer</span> USD</span>
+            <span class="don-method-sub"><span data-lang="es">Dolares (cuenta arg)</span><span data-lang="en">USD (Arg account)</span></span>
           </button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Payment info -->
+      <div class="don-panel" id="don-panel-2" style="display:none;">
+        <button class="don-back-btn" onclick="donGoStep(1)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+          <span data-lang="es">volver</span><span data-lang="en">back</span>
+        </button>
+
+        <!-- PayPal panel -->
+        <div id="don-info-paypal" style="display:none;">
+          <p class="don-panel-title">PayPal</p>
+          <p class="don-info-text"><span data-lang="es">Hace click en el boton para ir a PayPal. Podes ingresar el monto que quieras en dolares.</span><span data-lang="en">Click the button to go to PayPal. You can enter any amount in USD.</span></p>
+          <a href="https://paypal.me/adagomiz?locale.x=es_XC&country.x=AR" target="_blank" class="don-action-btn" onclick="donAfterPaypal()">
+            <span data-lang="es">Ir a PayPal</span><span data-lang="en">Go to PayPal</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:.4rem"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <p class="don-hint"><span data-lang="es">Una vez realizado el pago, hace click en "Ya done" para registrar tu aporte.</span><span data-lang="en">Once payment is done, click "I donated" to register your contribution.</span></p>
+          <button class="don-next-btn" onclick="donGoStep(3)"><span data-lang="es">Ya done</span><span data-lang="en">I donated</span></button>
         </div>
 
-        <div class="crowd-bank-info" id="crowd-bank-eur" style="display:none;">
-          <div class="crowd-bank-label"><span data-lang="es">Transferencia en euros</span><span data-lang="en">Transfer in euros</span></div>
-          <div class="crowd-bank-row"><span>Titular</span><span>Pierina Lategola</span></div>
-          <div class="crowd-bank-row"><span>IBAN</span><span>DE36 1001 1001 2209 6079 50</span></div>
-          <div class="crowd-bank-row"><span>Banco</span><span>N26 (Alemania)</span></div>
-          <div class="crowd-bank-note"><span data-lang="es">Concepto: Ada Gomiz Crowdfunding + tu nombre</span><span data-lang="en">Reference: Ada Gomiz Crowdfunding + your name</span></div>
+        <!-- EUR transfer -->
+        <div id="don-info-eur" style="display:none;">
+          <p class="don-panel-title"><span data-lang="es">Transferencia en euros</span><span data-lang="en">Transfer in euros</span></p>
+          <div class="don-bank-table">
+            <div class="don-bank-row"><span class="don-bank-label">Titular</span><span class="don-bank-value">Pierina Lategola</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">IBAN</span><span class="don-bank-value don-bank-mono">DE36 1001 1001 2209 6079 50</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">Banco</span><span class="don-bank-value">N26 (Alemania)</span></div>
+            <div class="don-bank-row"><span class="don-bank-label"><span data-lang="es">Concepto</span><span data-lang="en">Reference</span></span><span class="don-bank-value don-bank-ref">Ada Gomiz + tu nombre</span></div>
+          </div>
+          <p class="don-hint"><span data-lang="es">Una vez realizada la transferencia, hace click en "Ya transferi" para registrar tu aporte.</span><span data-lang="en">Once the transfer is done, click "I transferred" to register your contribution.</span></p>
+          <button class="don-next-btn" onclick="donGoStep(3)"><span data-lang="es">Ya transferi</span><span data-lang="en">I transferred</span></button>
         </div>
 
-        <div class="crowd-bank-info" id="crowd-bank-ars" style="display:none;">
-          <div class="crowd-bank-label"><span data-lang="es">Transferencia en pesos (Argentina)</span><span data-lang="en">Transfer in pesos (Argentina)</span></div>
-          <div class="crowd-bank-row"><span>Titular</span><span>Ada Russo</span></div>
-          <div class="crowd-bank-row"><span>CBU</span><span>0720182688000002529068</span></div>
-          <div class="crowd-bank-row"><span>Alias</span><span>DEPOSIT.ADA</span></div>
-          <div class="crowd-bank-row"><span>Banco</span><span>Santander</span></div>
-          <div class="crowd-bank-note"><span data-lang="es">Concepto: Crowdfunding + tu nombre</span><span data-lang="en">Reference: Crowdfunding + your name</span></div>
+        <!-- ARS transfer -->
+        <div id="don-info-ars" style="display:none;">
+          <p class="don-panel-title"><span data-lang="es">Transferencia en pesos</span><span data-lang="en">Transfer in pesos</span></p>
+          <div class="don-bank-table">
+            <div class="don-bank-row"><span class="don-bank-label">Titular</span><span class="don-bank-value">Ada Russo</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">CBU</span><span class="don-bank-value don-bank-mono">0720182688000002529068</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">Alias</span><span class="don-bank-value don-bank-mono">DEPOSIT.ADA</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">Banco</span><span class="don-bank-value">Santander</span></div>
+            <div class="don-bank-row"><span class="don-bank-label"><span data-lang="es">Concepto</span><span data-lang="en">Reference</span></span><span class="don-bank-value don-bank-ref">Colecta + tu nombre</span></div>
+          </div>
+          <p class="don-hint"><span data-lang="es">Una vez realizada la transferencia, hace click en "Ya transferi" para registrar tu aporte.</span><span data-lang="en">Once the transfer is done, click "I transferred" to register your contribution.</span></p>
+          <button class="don-next-btn" onclick="donGoStep(3)"><span data-lang="es">Ya transferi</span><span data-lang="en">I transferred</span></button>
         </div>
 
-        <div class="crowd-bank-info" id="crowd-bank-usd-arg" style="display:none;">
-          <div class="crowd-bank-label"><span data-lang="es">Transferencia en dolares (Argentina)</span><span data-lang="en">Transfer in USD (Argentina)</span></div>
-          <div class="crowd-bank-row"><span>Titular</span><span>Ada Russo</span></div>
-          <div class="crowd-bank-row"><span>CBU</span><span>0720182688000002529068</span></div>
-          <div class="crowd-bank-row"><span>Banco</span><span>Santander</span></div>
-          <div class="crowd-bank-note"><span data-lang="es">Concepto: Crowdfunding USD + tu nombre</span><span data-lang="en">Reference: Crowdfunding USD + your name</span></div>
+        <!-- USD-arg transfer -->
+        <div id="don-info-usd-arg" style="display:none;">
+          <p class="don-panel-title"><span data-lang="es">Transferencia en dolares (Argentina)</span><span data-lang="en">Transfer in USD (Argentina)</span></p>
+          <div class="don-bank-table">
+            <div class="don-bank-row"><span class="don-bank-label">Titular</span><span class="don-bank-value">Ada Russo</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">CBU</span><span class="don-bank-value don-bank-mono">0720182688000002529068</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">Alias</span><span class="don-bank-value don-bank-mono">DEPOSIT.ADA</span></div>
+            <div class="don-bank-row"><span class="don-bank-label">Banco</span><span class="don-bank-value">Santander</span></div>
+            <div class="don-bank-row"><span class="don-bank-label"><span data-lang="es">Concepto</span><span data-lang="en">Reference</span></span><span class="don-bank-value don-bank-ref">Colecta USD + tu nombre</span></div>
+          </div>
+          <p class="don-hint"><span data-lang="es">Una vez realizada la transferencia, hace click en "Ya transferi" para registrar tu aporte.</span><span data-lang="en">Once the transfer is done, click "I transferred" to register your contribution.</span></p>
+          <button class="don-next-btn" onclick="donGoStep(3)"><span data-lang="es">Ya transferi</span><span data-lang="en">I transferred</span></button>
         </div>
-      </form>
+      </div>
+
+      <!-- STEP 3: Confirm donation -->
+      <div class="don-panel" id="don-panel-3" style="display:none;">
+        <button class="don-back-btn" onclick="donGoStep(2)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+          <span data-lang="es">volver</span><span data-lang="en">back</span>
+        </button>
+        <p class="don-panel-title"><span data-lang="es">Registra tu aporte</span><span data-lang="en">Register your contribution</span></p>
+        <p class="don-info-text"><span data-lang="es">Estos datos son opcionales pero nos ayudan a llevar el registro y agradecerte.</span><span data-lang="en">These fields are optional but help us keep track and thank you.</span></p>
+
+        <div class="don-field">
+          <label class="don-field-label"><span data-lang="es">Tu nombre</span><span data-lang="en">Your name</span> <span class="don-field-hint">(<span data-lang="es">o "Anonimo"</span><span data-lang="en">or "Anonymous"</span>)</span></label>
+          <input type="text" id="don-name" placeholder="Ada" autocomplete="given-name" class="don-input">
+        </div>
+        <div class="don-field">
+          <label class="don-field-label"><span data-lang="es">Monto aproximado</span><span data-lang="en">Approximate amount</span> <span class="don-field-hint">(<span data-lang="es">en la moneda que usaste</span><span data-lang="en">in the currency you used</span>)</span></label>
+          <input type="number" id="don-amount" placeholder="20" min="1" class="don-input">
+        </div>
+        <div class="don-field">
+          <label class="don-field-label">Email <span class="don-field-hint">(<span data-lang="es">confidencial, no se comparte</span><span data-lang="en">confidential, never shared</span>)</span></label>
+          <input type="email" id="don-email" placeholder="ada@mail.com" autocomplete="email" class="don-input">
+        </div>
+        <div class="don-field">
+          <label class="don-field-label"><span data-lang="es">Mensaje (opcional)</span><span data-lang="en">Message (optional)</span></label>
+          <textarea id="don-msg" placeholder="..." class="don-input don-textarea"></textarea>
+        </div>
+
+        <button class="don-submit-btn" onclick="donSubmit()">
+          <span data-lang="es">Confirmar aporte</span><span data-lang="en">Confirm contribution</span>
+        </button>
+      </div>
+
+      <!-- STEP 4: Thank you -->
+      <div class="don-panel" id="don-panel-4" style="display:none;">
+        <div class="don-thanks">
+          <div class="don-thanks-icon">✦</div>
+          <p class="don-thanks-title"><span data-lang="es">Gracias!</span><span data-lang="en">Thank you!</span></p>
+          <p class="don-info-text"><span data-lang="es">Tu aporte quedo registrado. Significa muchisimo.</span><span data-lang="en">Your contribution has been registered. It means a lot.</span></p>
+          <button class="don-back-btn" style="margin-top:1.5rem;display:inline-flex;" onclick="donReset()">
+            <span data-lang="es">Hacer otro aporte</span><span data-lang="en">Make another contribution</span>
+          </button>
+        </div>
+      </div>
+
     </div>
+    <!-- ══ END DONATION WIDGET ══════════════════════════════════════════════ -->
   </div>
 </section>
 
@@ -932,6 +1054,61 @@ async function crowdSubmit(e){
   if(crowdTarget === 'paypal') setTimeout(function(){ window.open(CROWD_PAYPAL, '_blank'); }, 1200);
 }
 crowdLoad();
+
+// ── DONATION WIDGET ──────────────────────────────────────────────────────────
+var donMethod = '';
+
+function donSelectMethod(method) {
+  donMethod = method;
+  ['paypal','eur','ars','usd-arg'].forEach(function(m) {
+    var el = document.getElementById('don-info-' + m);
+    if (el) el.style.display = (m === method) ? 'block' : 'none';
+  });
+  donGoStep(2);
+}
+
+function donAfterPaypal() {
+  // just let the link open, user clicks "Ya done" manually
+}
+
+function donGoStep(n) {
+  [1,2,3,4].forEach(function(i) {
+    var panel = document.getElementById('don-panel-' + i);
+    if (panel) panel.style.display = (i === n) ? 'block' : 'none';
+  });
+  [1,2,3].forEach(function(i) {
+    var dot = document.getElementById('don-step-dot-' + i);
+    if (!dot) return;
+    dot.classList.remove('active','done');
+    if (i < n) dot.classList.add('done');
+    else if (i === n) dot.classList.add('active');
+  });
+  // language refresh inside widget
+  document.querySelectorAll('#don-panel-' + n + ' [data-lang]').forEach(function(el) {
+    el.style.display = el.dataset.lang === lang ? (el.tagName === 'SPAN' ? 'inline' : 'block') : 'none';
+  });
+}
+
+async function donSubmit() {
+  var name = (document.getElementById('don-name') ? document.getElementById('don-name').value.trim() : '') || 'Anonimo';
+  var amount = document.getElementById('don-amount') ? document.getElementById('don-amount').value : '0';
+  var email = (document.getElementById('don-email') ? document.getElementById('don-email').value.trim() : '') || '';
+  var msg = (document.getElementById('don-msg') ? document.getElementById('don-msg').value.trim() : '') || '';
+
+  var entry = { name: name, email: email, amount: amount, via: donMethod, message: msg };
+  await crowdSave(entry);
+  donGoStep(4);
+}
+
+function donReset() {
+  donMethod = '';
+  document.getElementById('don-name').value = '';
+  document.getElementById('don-amount').value = '';
+  document.getElementById('don-email').value = '';
+  document.getElementById('don-msg').value = '';
+  donGoStep(1);
+}
+
 </script>
 <!-- Score viewer via Google Docs -->
 <script>
