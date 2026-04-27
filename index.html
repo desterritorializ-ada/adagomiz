@@ -296,6 +296,117 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
 .don-thanks-icon{font-size:2rem;color:var(--gold);margin-bottom:1rem;display:block;}
 .don-thanks-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:1.1rem;font-weight:200;color:var(--tq-foam);margin-bottom:.8rem;letter-spacing:.05em;}
 
+<script>
+const AIRTABLE_TOKEN = "patBOiOAvZf3Asrxq";
+const BASE_ID = "appXgsSimV2eiG7VV";
+const TABLE_NAME = "Table 1";
+
+const GOAL = 3000;
+
+// ENVIAR DONACION
+async function donSubmit() {
+
+  const name = document.getElementById("don-name").value || "Anonimo";
+  const amount = parseFloat(document.getElementById("don-amount").value) || 0;
+  const email = document.getElementById("don-email").value || "";
+  const msg = document.getElementById("don-msg").value || "";
+
+  if (amount <= 0) {
+    alert("Ingresa un monto valido");
+    return;
+  }
+
+  try {
+
+const response = await fetch(
+  `https://api.airtable.com/v0/${BASE_ID}/Table%201`,
+  {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${AIRTABLE_TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      fields: {
+        Name: name,
+        "amount ": amount,
+        email: email,
+        message: msg
+      }
+    })
+  }
+);
+
+    const data = await response.json();
+
+    console.log(data);
+
+    // actualizar barra
+    loadCrowdfundingData();
+
+    // mostrar gracias
+    donGoStep(4);
+
+  } catch (err) {
+    console.error(err);
+    alert("Error enviando donacion");
+  }
+}
+
+
+// CARGAR DATOS DESDE AIRTABLE
+async function loadCrowdfundingData() {
+
+  try {
+
+    const response = await fetch(
+      `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`,
+      {
+        headers: {
+          "Authorization": `Bearer ${AIRTABLE_TOKEN}`
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    let total = 0;
+
+    data.records.forEach(record => {
+      total += Number(record.fields.Monto || 0);
+    });
+
+    const pct = Math.min((total / GOAL) * 100, 100);
+
+    document.getElementById("crowd-total").innerText = total;
+    document.getElementById("crowd-total-2").innerText = total;
+
+    document.getElementById("crowd-pct").innerText =
+      pct.toFixed(0) + "%";
+
+    document.getElementById("crowd-pct-2").innerText =
+      pct.toFixed(0) + "%";
+
+    document.getElementById("crowd-fill").style.width =
+      pct + "%";
+
+    document.getElementById("crowd-fill-2").style.width =
+      pct + "%";
+
+    document.getElementById("crowd-count").innerText =
+      data.records.length;
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+
+// cargar al abrir
+loadCrowdfundingData();
+</script>
+
+
 </style>
 </head>
 <body>
