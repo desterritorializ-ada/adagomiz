@@ -296,6 +296,7 @@ footer p{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;fon
 .don-thanks-icon{font-size:2rem;color:var(--gold);margin-bottom:1rem;display:block;}
 .don-thanks-title{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:1.1rem;font-weight:200;color:var(--tq-foam);margin-bottom:.8rem;letter-spacing:.05em;}
 
+/*
 <script>
 const AIRTABLE_TOKEN = "patBOiOAvZf3Asrxq";
 const BASE_ID = "appXgsSimV2eiG7VV";
@@ -405,7 +406,7 @@ async function loadCrowdfundingData() {
 // cargar al abrir
 loadCrowdfundingData();
 </script>
-
+*/
 
 </style>
 </head>
@@ -542,7 +543,7 @@ loadCrowdfundingData();
       <p class="crowd-intro-sub">Ada Gomiz &middot; Fundraising for contemporary music workshops and festivals &middot; 2026</p>
     </div>
 
-    <div class="crowd-progress-wrap">
+    /*<div class="crowd-progress-wrap">
       <div class="crowd-raised-num"><span>USD</span><span id="crowd-total">0</span></div>
       <div class="crowd-progress-track"><div class="crowd-progress-fill" id="crowd-fill" style="width:0%"></div></div>
       <div class="crowd-progress-meta">
@@ -550,7 +551,7 @@ loadCrowdfundingData();
         <span><span data-lang="es">meta</span><span data-lang="en">goal</span> USD 3.000 &middot; <span id="crowd-count">0</span> <span data-lang="es">aportes</span><span data-lang="en">contributions</span></span>
       </div>
     </div>
-
+*/
     <div data-lang="es">
       <p class="crowd-summary">Esta es una colecta para financiar un viaje a dos festivales internacionales de musica contemporanea: el <a href="https://www.takensemble.com/tak-lab" target="_blank" class="crowd-link">TAK LAB</a> en Nueva York y el <a href="https://sites.google.com/view/foresty-festival-eng/" target="_blank" class="crowd-link">Foresty Festival</a> en Piamonte, Italia. En esos festivales tomare workshops con reconocidos compositores y estrenare obras nuevas para ensamble. Ambos ocurren el mismo verano (julio-agosto). El dinero recaudado sera para pasajes, alojamiento y estadia. Gracias por tomarte el tiempo de leer, donar y/o compartir! Es una gran ayuda para impulsar mi formacion y carrera profesional.</p>
     </div>
@@ -558,7 +559,7 @@ loadCrowdfundingData();
       <p class="crowd-summary">This is a fundraiser to cover travel to two international contemporary music festivals: <a href="https://www.takensemble.com/tak-lab" target="_blank" class="crowd-link">TAK LAB</a> in New York and <a href="https://sites.google.com/view/foresty-festival-eng/" target="_blank" class="crowd-link">Foresty Festival</a> in Piedmont, Italy. At these festivals I'll take workshops with renowned composers and premiere new works for ensemble. Both happen the same summer (July-August). Funds raised will go toward flights, accommodation and living expenses. Thank you for taking the time to read, donate and/or share -- it makes a huge difference for my artistic development and professional career!</p>
     </div>
   </div>
-
+/*
   <div class="crowd-video-wrap reveal">
   <iframe 
     src="https://www.youtube.com/embed/pW-aDf8wPZQ?rel=0"
@@ -567,7 +568,7 @@ loadCrowdfundingData();
     allowfullscreen>
   </iframe>
 </div>
-
+*/
   <div class="crowd-body reveal">
     <div data-lang="es">
       <p class="crowd-section-label">Quien soy</p>
@@ -1199,6 +1200,7 @@ function donGoStep(n) {
   });
 }
 
+/*
 async function donSubmit() {
   var name = (document.getElementById('don-name') ? document.getElementById('don-name').value.trim() : '') || 'Anonimo';
   var amount = document.getElementById('don-amount') ? document.getElementById('don-amount').value : '0';
@@ -1208,6 +1210,39 @@ async function donSubmit() {
   var entry = { name: name, email: email, amount: amount, via: donMethod, message: msg };
   await crowdSave(entry);
   donGoStep(4);
+}
+*/ 
+
+async function donSubmit() {
+
+  var name = (document.getElementById('don-name')?.value.trim()) || 'Anonimo';
+  var amount = document.getElementById('don-amount')?.value || '0';
+  var email = (document.getElementById('don-email')?.value.trim()) || '';
+  var msg = (document.getElementById('don-msg')?.value.trim()) || '';
+
+  try {
+
+    await fetch("https://formsubmit.co/ajax/desterritorializ.ada@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        nombre: name,
+        monto: amount,
+        email: email,
+        metodo: donMethod,
+        mensaje: msg
+      })
+    });
+
+    donGoStep(4);
+
+  } catch(err) {
+    console.error(err);
+    alert("Error enviando los datos");
+  }
 }
 
 function donReset() {
