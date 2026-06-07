@@ -488,16 +488,26 @@ function donGoStep(n){
 }
 
 var CROWD_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQu4A9YnZyteNrltmiBuHhqLPSdJNBjYuDeJb8MW7uTq_ZD4ix1TiMuVr8TkRpbjyKrg/exec';
+
+async function crowdSave(entry){
+  if(CROWD_SCRIPT_URL === 'TU_APPS_SCRIPT_URL_AQUI'){ return; }
+  try{
+    await fetch(CROWD_SCRIPT_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'save',name:entry.name,email:entry.email,amount:parseFloat(entry.amount)||0,via:entry.via,message:entry.message,date:new Date().toISOString().split('T')[0]})
+    });
+  }catch(e){ console.warn('Sheets save:', e); }
+}
+
 async function donSubmit(){
-  var name=(document.getElementById('don-name')?.value.trim())'Anonimo';
-  var amount=document.getElementById('don-amount')?.value
-'0';
-  var email=(document.getElementById('don-email')?.value.trim())'';
-  var msg=(document.getElementById('don-msg')?.value.trim())
-'';
+  var name=(document.getElementById('don-name')?.value.trim())||'Anonimo';
+  var amount=document.getElementById('don-amount')?.value||'0';
+  var email=(document.getElementById('don-email')?.value.trim())||'';
+  var msg=(document.getElementById('don-msg')?.value.trim())||'';
   var entry={name:name,email:email,amount:amount,via:donMethod,message:msg};
   try{
-    await fetch("https://formsubmit.co/ajax/desterritorializ.ada@gmail.com",%7B
+    await fetch("https://formsubmit.co/ajax/desterritorializ.ada@gmail.com",{
       method:"POST",
       headers:{"Content-Type":"application/json","Accept":"application/json"},
       body:JSON.stringify({nombre:name,monto:amount,email:email,metodo:donMethod,mensaje:msg})
@@ -509,4 +519,6 @@ async function donSubmit(){
     donGoStep(4);
   }
 }
+</script>
+</body>
 </html>
