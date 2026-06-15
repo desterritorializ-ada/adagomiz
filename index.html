@@ -705,6 +705,12 @@ function toggleLang(){
 }
 document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
 document.querySelectorAll('[data-lang="es"]').forEach(el=>el.style.display='inline');
+document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
+
+// Auto-detect language
+const userLang = navigator.language || navigator.userLanguage || 'es';
+if (!/^es/i.test(userLang)) toggleLang();
+
 function openLightbox(src){document.getElementById('lb-img').src=src;document.getElementById('lightbox').classList.add('open');}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget||e.target.id==='lightbox-close')document.getElementById('lightbox').classList.remove('open');});
 const WORK_IMGS={'dos-cisnes':'images/03-dos-cisnes.jpg','hipnoidal':'images/04-hipnoidal.png','huella-winka':'images/05-huella-winka.jpg','kuzemallu':'images/06-kuzemallu.png','bosque':'images/07-bosque.jpg','llamaban':'images/08-llamaban.jpeg','polyflux':'images/09-polyflux.png','purpur':'images/10-purpur.png','afuerigena':'images/11-afuerigena.jpg','laberinto':'images/12-laberinto.png'};
