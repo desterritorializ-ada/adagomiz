@@ -460,6 +460,11 @@ function toggleLang(){
 }
 document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
 document.querySelectorAll('[data-lang="es"]').forEach(el=>el.style.display='inline');
+document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
+
+// Auto-detect language
+const userLang = navigator.language || navigator.userLanguage || 'es';
+if (!/^es/i.test(userLang)) toggleLang();
 
 // Share functions
 var CROWD_URL = 'https://adagomiz.com.ar/crowdfunding';
