@@ -51,8 +51,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0);}
 .dropdown li{list-style:none;}.dropdown a{display:block;padding:.55rem 1.4rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;letter-spacing:.02em;text-transform:none;opacity:.7;transition:all .25s;}
 .dropdown a::after{display:none;}.dropdown a:hover{opacity:1;padding-left:2rem;color:var(--tq-foam);}
-.lang-btn{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(192,53,122,.35);padding:.4rem .9rem;background:transparent;cursor:none;transition:all .35s;white-space:nowrap;flex-shrink:0;}
+.lang-picker{position:relative;flex-shrink:0;}
+.lang-btn{font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tq-light);border:1px solid rgba(192,53,122,.35);padding:.4rem .9rem;background:transparent;cursor:none;transition:all .35s;white-space:nowrap;display:flex;align-items:center;gap:.4rem;}
 .lang-btn:hover{background:rgba(192,53,122,.1);border-color:var(--tq-light);color:var(--tq-foam);}
+.lang-btn svg{width:8px;height:8px;fill:none;stroke:currentColor;stroke-width:2;transition:transform .25s;}
+.lang-picker.open .lang-btn svg{transform:rotate(180deg);}
+.lang-menu{position:absolute;top:calc(100% + .5rem);right:0;background:rgba(15,8,38,.97);backdrop-filter:blur(14px);border:1px solid rgba(192,53,122,.2);min-width:130px;padding:.4rem 0;opacity:0;visibility:hidden;transform:translateY(-6px);transition:all .25s ease;z-index:300;}
+.lang-picker.open .lang-menu{opacity:1;visibility:visible;transform:translateY(0);}
+.lang-menu button{display:block;width:100%;text-align:left;padding:.45rem 1rem;font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tq-pale);background:none;border:none;cursor:none;transition:all .2s;white-space:nowrap;}
+.lang-menu button:hover{color:var(--tq-foam);background:rgba(192,53,122,.08);padding-left:1.3rem;}
+.lang-menu button.active{color:var(--tq-light);}
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 8vw;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 70% 50%,rgba(107,32,144,.22) 0%,transparent 70%);}
 .hero-portrait{position:absolute;right:0;top:0;bottom:0;width:52vw;max-width:680px;overflow:hidden;}
@@ -439,7 +447,7 @@ loadCrowdfundingData();
   <div class="nav-right">
     <ul class="nav-links">
       <li class="nav-item">
-        <a href="#works"><span data-lang="es">Obras</span><span data-lang="en">Works</span></a>
+        <a href="#works" id="t-nav-works">Obras</a>
         <ul class="dropdown">
           <li><a href="#" onclick="openWork('dos-cisnes');return false;">Dos Cisnes Negros (2025)</a></li>
           <li><a href="#" onclick="openWork('hipnoidal');return false;">Hipnoidal (2025)</a></li>
@@ -454,13 +462,23 @@ loadCrowdfundingData();
         </ul>
       </li>
       <li><a href="#bio">Bio</a></li>
-      <li><a href="#gallery"><span data-lang="es">Galería</span><span data-lang="en">Gallery</span></a></li>
+      <li><a href="#gallery" id="t-nav-gallery">Galería</a></li>
       <li><a href="#cv">CV</a></li>
       <li><a href="#logbook">Log-book</a></li>
-      <li><a href="#contact"><span data-lang="es">Contacto</span><span data-lang="en">Contact</span></a></li>
-      <li><a href="https://adagomiz.com.ar/crowdfunding" style="color:var(--gold);opacity:1;">Crowdfunding</a></li>
+      <li><a href="#contact" id="t-nav-contact">Contacto</a></li>
+      <li><a href="https://adagomiz.com.ar/crowdfunding" style="color:var(--gold);opacity:1;" id="t-nav-crowd">Crowdfunding</a></li>
     </ul>
-    <button class="lang-btn" id="lang-toggle" onclick="toggleLang()">EN</button>
+    <div class="lang-picker" id="lang-picker">
+      <button class="lang-btn" onclick="toggleLangMenu(event)" id="lang-btn-label">ES <svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg></button>
+      <div class="lang-menu" id="lang-menu">
+        <button onclick="setLang('es')" class="active" data-lcode="es">ES — Español</button>
+        <button onclick="setLang('en')" data-lcode="en">EN — English</button>
+        <button onclick="setLang('ja')" data-lcode="ja">JA — 日本語</button>
+        <button onclick="setLang('pt')" data-lcode="pt">PT — Português</button>
+        <button onclick="setLang('it')" data-lcode="it">IT — Italiano</button>
+        <button onclick="setLang('de')" data-lcode="de">DE — Deutsch</button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -468,36 +486,27 @@ loadCrowdfundingData();
   <div class="hero-bg"></div>
   <div class="hero-portrait"><img src="images/01-portada.jpg" alt="Ada Gomiz"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow"><span data-lang="es">Buenos Aires · Argentina</span><span data-lang="en">Buenos Aires · Argentina</span></p>
+    <p class="hero-eyebrow" id="t-hero-eyebrow">Buenos Aires · Argentina</p>
     <h1 class="hero-name">Ada Gomiz</h1>
-    <p class="hero-role">
-      <span data-lang="es">compositora · performer · artista sonora</span>
-      <span data-lang="en">composer · performer · sound artist</span>
-    </p>
-    <p class="hero-desc">
-      <span data-lang="es">Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar. Su práctica incorpora improvisación, arte sonoro, performance y otros mundos intermedialidades.</span>
-      <span data-lang="en">Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar. Her practice incorporates improvisation, sound art, performance and other dreamlike intermedialities.</span>
-    </p>
-
-    <a href="https://adagomiz.com.ar/crowdfunding" class="contact-link" style="display:inline-block;margin-top:2.2rem;font-size:.58rem;letter-spacing:.22em;padding:.85rem 2rem;opacity:0;animation:fadeUp 1s ease forwards 1.4s;">
-      <span data-lang="es">Ayudame a llevar mi música a Nueva York e Italia — Crowdfunding</span><span data-lang="en" style="display:none;">Help me bring music to New York and Italy — Crowdfunding</span>
-    </a>
+    <p class="hero-role" id="t-hero-role">compositora · performer · artista sonora</p>
+    <p class="hero-desc" id="t-hero-desc">Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar. Su práctica incorpora improvisación, arte sonoro, performance y otros mundos intermedialidades.</p>
+    <a href="https://adagomiz.com.ar/crowdfunding" class="contact-link" style="display:inline-block;margin-top:2.2rem;font-size:.58rem;letter-spacing:.22em;padding:.85rem 2rem;opacity:0;animation:fadeUp 1s ease forwards 1.4s;" id="t-hero-cta">Ayudame a llevar mi música a Nueva York e Italia — Crowdfunding</a>
   </div>
 </section>
 
 <section id="works" class="works-section">
-  <div class="sec-label"><span data-lang="es">Obras Seleccionadas</span><span data-lang="en">Selected Works</span></div>
+  <div class="sec-label" id="t-works-label">Obras Seleccionadas</div>
   <div class="works-grid">
-    <div class="work-card reveal" onclick="openWork('dos-cisnes')"><div class="work-card-bg"><img src="images/03-dos-cisnes.jpg" alt="Dos Cisnes Negros"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Dos Cisnes Negros</div><div class="work-venue"><span data-lang="es">para dos clarinetes bajos</span><span data-lang="en">for two bass clarinets</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('hipnoidal')"><div class="work-card-bg"><img src="images/04-hipnoidal.png" alt="Hipnoidal"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Hipnoidal</div><div class="work-venue"><span data-lang="es">butoh · teatro de sombras · música en vivo</span><span data-lang="en">butoh · shadow theatre · live music</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('huella-winka')"><div class="work-card-bg"><img src="images/05-huella-winka.jpg" alt="Huella Winka"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Huella Winka — Censored</div><div class="work-venue"><span data-lang="es">shakuhachi y field recordings</span><span data-lang="en">shakuhachi and field recordings</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('kuzemallu')"><div class="work-card-bg"><img src="images/06-kuzemallu.png" alt="Küzemallu"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Küzemallu</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas</span><span data-lang="en">string quartet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('bosque')"><div class="work-card-bg"><img src="images/07-bosque.jpg" alt="Bosque de Adas"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2023/2024</div><div class="work-title">Flamenco Transplatino</div><div class="work-venue"><span data-lang="es">viola, contrabajo, vibráfono, percusión, cante y clarinete</span><span data-lang="en">viola, double bass, vibraphone, percussion, singing and clarinet</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('llamaban')"><div class="work-card-bg"><img src="images/08-llamaban.jpeg" alt="Llamaban los Almúedanos"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Llamaban los Almúedanos</div><div class="work-venue"><span data-lang="es">cuarteto de cuerdas y performer</span><span data-lang="en">string quartet and performer</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('polyflux')"><div class="work-card-bg"><img src="images/09-polyflux.png" alt="Polyfluxaoboiotic"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Polyfluxaoboiotic</div><div class="work-venue"><span data-lang="es">ensamble vocal</span><span data-lang="en">vocal ensemble</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('purpur')"><div class="work-card-bg"><img src="images/10-purpur.png" alt="Púrpur"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Púrpur</div><div class="work-venue"><span data-lang="es">cello solo</span><span data-lang="en">solo cello</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('afuerigena')"><div class="work-card-bg"><img src="images/11-afuerigena.jpg" alt="Afuerígena"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2021</div><div class="work-title">Afuerígena</div><div class="work-venue"><span data-lang="es">livelooping · visuales generativas · recitado</span><span data-lang="en">livelooping · generative visuals · spoken word</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
-    <div class="work-card reveal" onclick="openWork('laberinto')"><div class="work-card-bg"><img src="images/12-laberinto.png" alt="Laberinto Áureo"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2020</div><div class="work-title">Laberinto Áureo</div><div class="work-venue"><span data-lang="es">recitantes, flauta, clarinete, piano y percusión</span><span data-lang="en">speakers, flute, clarinet, piano and percussion</span></div><div class="work-open-btn"><span data-lang="es">ver obra</span><span data-lang="en">view work</span></div></div></div>
+    <div class="work-card reveal" onclick="openWork('dos-cisnes')"><div class="work-card-bg"><img src="images/03-dos-cisnes.jpg" alt="Dos Cisnes Negros"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Dos Cisnes Negros</div><div class="work-venue" id="t-venue-dos-cisnes">para dos clarinetes bajos</div><div class="work-open-btn" id="t-btn-dos-cisnes">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('hipnoidal')"><div class="work-card-bg"><img src="images/04-hipnoidal.png" alt="Hipnoidal"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Hipnoidal</div><div class="work-venue" id="t-venue-hipnoidal">butoh · teatro de sombras · música en vivo</div><div class="work-open-btn" id="t-btn-hipnoidal">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('huella-winka')"><div class="work-card-bg"><img src="images/05-huella-winka.jpg" alt="Huella Winka"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Huella Winka — Censored</div><div class="work-venue" id="t-venue-huella-winka">shakuhachi y field recordings</div><div class="work-open-btn" id="t-btn-huella-winka">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('kuzemallu')"><div class="work-card-bg"><img src="images/06-kuzemallu.png" alt="Küzemallu"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2025</div><div class="work-title">Küzemallu</div><div class="work-venue" id="t-venue-kuzemallu">cuarteto de cuerdas</div><div class="work-open-btn" id="t-btn-kuzemallu">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('bosque')"><div class="work-card-bg"><img src="images/07-bosque.jpg" alt="Bosque de Adas"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2023/2024</div><div class="work-title">Flamenco Transplatino</div><div class="work-venue" id="t-venue-bosque">viola, contrabajo, vibráfono, percusión, cante y clarinete</div><div class="work-open-btn" id="t-btn-bosque">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('llamaban')"><div class="work-card-bg"><img src="images/08-llamaban.jpeg" alt="Llamaban los Almúedanos"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Llamaban los Almúedanos</div><div class="work-venue" id="t-venue-llamaban">cuarteto de cuerdas y performer</div><div class="work-open-btn" id="t-btn-llamaban">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('polyflux')"><div class="work-card-bg"><img src="images/09-polyflux.png" alt="Polyfluxaoboiotic"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Polyfluxaoboiotic</div><div class="work-venue" id="t-venue-polyflux">ensamble vocal</div><div class="work-open-btn" id="t-btn-polyflux">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('purpur')"><div class="work-card-bg"><img src="images/10-purpur.png" alt="Púrpur"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2022</div><div class="work-title">Púrpur</div><div class="work-venue" id="t-venue-purpur">cello solo</div><div class="work-open-btn" id="t-btn-purpur">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('afuerigena')"><div class="work-card-bg"><img src="images/11-afuerigena.jpg" alt="Afuerígena"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2021</div><div class="work-title">Afuerígena</div><div class="work-venue" id="t-venue-afuerigena">livelooping · visuales generativas · recitado</div><div class="work-open-btn" id="t-btn-afuerigena">ver obra</div></div></div>
+    <div class="work-card reveal" onclick="openWork('laberinto')"><div class="work-card-bg"><img src="images/12-laberinto.png" alt="Laberinto Áureo"></div><div class="work-card-overlay"></div><div class="work-card-gradient"></div><div class="work-info"><div class="work-year">2020</div><div class="work-title">Laberinto Áureo</div><div class="work-venue" id="t-venue-laberinto">recitantes, flauta, clarinete, piano y percusión</div><div class="work-open-btn" id="t-btn-laberinto">ver obra</div></div></div>
   </div>
 </section>
 
@@ -510,24 +519,12 @@ loadCrowdfundingData();
     <div class="reveal">
       <div class="sec-label">Bio</div>
       <h2 class="bio-name">Ada Gomiz</h2>
-      <p class="bio-subtitle">
-        <span data-lang="es">Compositora · Multiinstrumentista · Artista Sonora · Performer</span>
-        <span data-lang="en">Composer · Multi-instrumentalist · Sound Artist · Performer</span>
-      </p>
-      <div data-lang="es">
-        <p class="bio-para">Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.</p>
-        <p class="bio-para">Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.</p>
-        <p class="bio-para">Habita prácticas orientadas a la improvisación libre y no tan libre, field recording encantatorio, cofradías butohkas y otras intermedialidades oníricas.</p>
-        <p class="bio-para">Sus obras fueron estrenadas en Alemania, Argentina, Dinamarca e Italia, destacando festivales y ciclos como Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival y Urondo Contemporáneo, así como presentaciones en espacios como Kirsten Kjærs Museum, Espacio Mostro y Arte x Arte en el marco de Bienal Sur.</p>
-        <p class="bio-para">Se encuentra finalizando la Licenciatura en Música en la Universidad Nacional de Tres de Febrero (UNTREF) y forma parte del equipo de investigación sobre auralidad de la Maestría en Arte Sonoro, dirigido por Raúl Minsgburg.</p>
-      </div>
-      <div data-lang="en" style="display:none">
-        <p class="bio-para">Ada Gomiz is a composer, sound artist, singer and wind player from Bella Vista, Buenos Aires, Argentina.</p>
-        <p class="bio-para">Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar.</p>
-        <p class="bio-para">She inhabits practices oriented toward free and not-so-free improvisation, enchanted field recording, butoh confraternities and other oneiric intermedialities.</p>
-        <p class="bio-para">Her works have been premiered in Germany, Argentina, Denmark and Italy, at festivals and cycles such as the Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival and Urondo Contemporáneo, as well as in venues such as Kirsten Kjærs Museum, Spazio Mostro and Arte x Arte as part of Bienal Sur.</p>
-        <p class="bio-para">She is completing a Bachelor's Degree in Music at the National University of Tres de Febrero (UNTREF) and is part of the aurality research team of the Master's Program in Sound Art, directed by Raúl Minsgburg.</p>
-      </div>
+      <p class="bio-subtitle" id="t-bio-subtitle">Compositora · Multiinstrumentista · Artista Sonora · Performer</p>
+      <p class="bio-para" id="t-bio-p1">Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.</p>
+      <p class="bio-para" id="t-bio-p2">Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.</p>
+      <p class="bio-para" id="t-bio-p3">Habita prácticas orientadas a la improvisación libre y no tan libre, field recording encantatorio, cofradías butohkas y otras intermedialidades oníricas.</p>
+      <p class="bio-para" id="t-bio-p4">Sus obras fueron estrenadas en Alemania, Argentina, Dinamarca e Italia, destacando festivales y ciclos como Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival y Urondo Contemporáneo, así como presentaciones en espacios como Kirsten Kjærs Museum, Espacio Mostro y Arte x Arte en el marco de Bienal Sur.</p>
+      <p class="bio-para" id="t-bio-p5">Se encuentra finalizando la Licenciatura en Música en la Universidad Nacional de Tres de Febrero (UNTREF) y forma parte del equipo de investigación sobre auralidad de la Maestría en Arte Sonoro, dirigido por Raúl Minsgburg.</p>
     </div>
   </div>
 </section>
@@ -535,21 +532,10 @@ loadCrowdfundingData();
 <!-- CROWDFUNDING -->
 <!-- CROWDFUNDING: ver /crowdfunding -->
 <section id="crowdfunding" style="padding:4rem 8vw;text-align:center;background:rgba(0,0,0,.12);">
-  <div class="sec-label" style="justify-content:center;margin-bottom:1.5rem;">
-    <span data-lang="es">Crowdfunding &middot; Colecta 2026</span>
-    <span data-lang="en">Crowdfunding &middot; 2026</span>
-  </div>
-  <h2 style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:200;color:var(--tq-foam);margin-bottom:.6rem;letter-spacing:-.01em;">
-    <span data-lang="es">Ayudame a llevar mi musica a Nueva York y Europa</span>
-    <span data-lang="en">Help me bring my music to New York and Europe</span>
-  </h2>
-  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--tq-light);margin-bottom:2rem;letter-spacing:.04em;">
-    <span data-lang="es">TAK LAB (Nueva York) &middot; Foresty Festival (Piamonte, Italia) &middot; 2026</span>
-    <span data-lang="en">TAK LAB (New York) &middot; Foresty Festival (Piedmont, Italy) &middot; 2026</span>
-  </p>
-  <a href="https://adagomiz.com.ar/crowdfunding" class="contact-link" style="font-size:.65rem;letter-spacing:.3em;padding:.95rem 2.8rem;">
-    <span data-lang="es">Ver la colecta y colaborar</span>
-    <span data-lang="en">View campaign and contribute</span>
+  <div class="sec-label" style="justify-content:center;margin-bottom:1.5rem;" id="t-crowd-label">Crowdfunding · Colecta 2026</div>
+  <h2 style="font-family:'Pangram','Inter',Helvetica,sans-serif;font-size:clamp(1.3rem,2.5vw,2rem);font-weight:200;color:var(--tq-foam);margin-bottom:.6rem;letter-spacing:-.01em;" id="t-crowd-heading">Ayudame a llevar mi musica a Nueva York y Europa</h2>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--tq-light);margin-bottom:2rem;letter-spacing:.04em;" id="t-crowd-sub">TAK LAB (Nueva York) · Foresty Festival (Piamonte, Italia) · 2026</p>
+  <a href="https://adagomiz.com.ar/crowdfunding" class="contact-link" style="font-size:.65rem;letter-spacing:.3em;padding:.95rem 2.8rem;" id="t-crowd-cta">Ver la colecta y colaborar</a>
   </a>
 </section>
 
@@ -613,7 +599,7 @@ loadCrowdfundingData();
 </section>
 
 <section id="coming" class="coming-section">
-  <div class="sec-label"><span data-lang="es">Próximamente</span><span data-lang="en">Coming Soon</span></div>
+  <div class="sec-label" id="t-coming-label">Próximamente</div>
   <div class="coming-grid">
     <div class="coming-card reveal"><div class="coming-year">2027</div><div class="coming-title">ARENA, ESPUMA Y LO INFINITO OCEÁNICO</div><div class="coming-detail">Dúo Alterface — piano, xeremias, percusión, electrónica</div></div>
     <div class="coming-card reveal"><div class="coming-year">2026</div><div class="coming-title">FLAMENCO TRANSPLATINO</div><div class="coming-detail"><span data-lang="es">Álbum. Para ensamble.</span><span data-lang="en">Album. For ensemble.</span></div></div>
@@ -681,7 +667,7 @@ loadCrowdfundingData();
 </section>
 
 <footer>
-  <p>© Ada Gomiz 2026 · Buenos Aires, Argentina · <span data-lang="es">todos los derechos reservados</span><span data-lang="en">all rights reserved</span></p>
+  <p>© Ada Gomiz 2026 · Buenos Aires, Argentina · <span id="t-footer">todos los derechos reservados</span></p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -694,22 +680,283 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.le
 const revs=document.querySelectorAll('.reveal');
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
 revs.forEach(el=>obs.observe(el));
-let lang='es';
-function toggleLang(){
-  lang=lang==='es'?'en':'es';
-  document.documentElement.lang=lang;
-  document.getElementById('lang-toggle').textContent=lang==='es'?'EN':'ES';
-  document.querySelectorAll('[data-lang]').forEach(el=>{
-    el.style.display=el.dataset.lang===lang?(el.tagName==='SPAN'?'inline':'block'):'none';
-  });
-}
-document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
-document.querySelectorAll('[data-lang="es"]').forEach(el=>el.style.display='inline');
-document.querySelectorAll('[data-lang="en"]').forEach(el=>el.style.display='none');
+// ── MULTI-LANGUAGE SYSTEM ────────────────────────────────────────────────────
+let lang = 'es';
 
-// Auto-detect language
+const T = {
+  es: {
+    role: 'compositora · performer · artista sonora',
+    desc: 'Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar. Su práctica incorpora improvisación, arte sonoro, performance y otros mundos intermedialidades.',
+    cta: 'Ayudame a llevar mi música a Nueva York e Italia — Crowdfunding',
+    worksLabel: 'Obras Seleccionadas',
+    navGallery: 'Galería', navContact: 'Contacto', navCrowd: 'Crowdfunding',
+    bioSubtitle: 'Compositora · Multiinstrumentista · Artista Sonora · Performer',
+    bioP1: 'Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.',
+    bioP2: 'Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.',
+    bioP3: 'Habita prácticas orientadas a la improvisación libre y no tan libre, field recording encantatorio, cofradías butohkas y otras intermedialidades oníricas.',
+    bioP4: 'Sus obras fueron estrenadas en Alemania, Argentina, Dinamarca e Italia, destacando festivales y ciclos como Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival y Urondo Contemporáneo, así como presentaciones en Kirsten Kjærs Museum, Espacio Mostro y Arte x Arte en el marco de Bienal Sur.',
+    bioP5: 'Se encuentra finalizando la Licenciatura en Música en la Universidad Nacional de Tres de Febrero (UNTREF) y forma parte del equipo de investigación sobre auralidad de la Maestría en Arte Sonoro, dirigido por Raúl Minsgburg.',
+    crowdTitle: 'Crowdfunding · Colecta 2026',
+    crowdHeading: 'Ayudame a llevar mi musica a Nueva York y Europa',
+    crowdSub: 'TAK LAB (Nueva York) · Foresty Festival (Piamonte, Italia) · 2026',
+    crowdCta: 'Ver la colecta y colaborar',
+    footer: 'todos los derechos reservados',
+    coming: 'Próximamente',
+    viewWork: 'ver obra', viewScore: 'ver partitura',
+    workVenues: {
+      'dos-cisnes': 'para dos clarinetes bajos',
+      'hipnoidal': 'butoh · teatro de sombras · música en vivo',
+      'huella-winka': 'shakuhachi y field recordings',
+      'kuzemallu': 'cuarteto de cuerdas',
+      'bosque': 'viola, contrabajo, vibráfono, percusión, cante y clarinete',
+      'llamaban': 'cuarteto de cuerdas y performer',
+      'polyflux': 'ensamble vocal',
+      'purpur': 'cello solo',
+      'afuerigena': 'livelooping · visuales generativas · recitado',
+      'laberinto': 'recitantes, flauta, clarinete, piano y percusión'
+    }
+  },
+  en: {
+    role: 'composer · performer · sound artist',
+    desc: 'Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar. Her practice incorporates improvisation, sound art, performance and other dreamlike intermedialities.',
+    cta: 'Help me bring music to New York and Italy — Crowdfunding',
+    worksLabel: 'Selected Works',
+    navGallery: 'Gallery', navContact: 'Contact', navCrowd: 'Crowdfunding',
+    bioSubtitle: 'Composer · Multi-instrumentalist · Sound Artist · Performer',
+    bioP1: 'Ada Gomiz is a composer, sound artist, singer and wind player from Bella Vista, Buenos Aires, Argentina.',
+    bioP2: 'Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar.',
+    bioP3: 'She inhabits practices oriented toward free and not-so-free improvisation, enchanted field recording, butoh confraternities and other oneiric intermedialities.',
+    bioP4: 'Her works have been premiered in Germany, Argentina, Denmark and Italy, at festivals such as the Darmstadt Ferienkurse, Distat Terra Festival, Slow Festival and Urondo Contemporáneo, as well as in venues such as Kirsten Kjærs Museum, Spazio Mostro and Arte x Arte as part of Bienal Sur.',
+    bioP5: 'She is completing a Bachelor\'s Degree in Music at the National University of Tres de Febrero (UNTREF) and is part of the aurality research team of the Master\'s Program in Sound Art, directed by Raúl Minsgburg.',
+    crowdTitle: 'Crowdfunding · 2026',
+    crowdHeading: 'Help me bring my music to New York and Europe',
+    crowdSub: 'TAK LAB (New York) · Foresty Festival (Piedmont, Italy) · 2026',
+    crowdCta: 'View campaign and contribute',
+    footer: 'all rights reserved',
+    coming: 'Coming Soon',
+    viewWork: 'view work', viewScore: 'view score',
+    workVenues: {
+      'dos-cisnes': 'for two bass clarinets',
+      'hipnoidal': 'butoh · shadow theatre · live music',
+      'huella-winka': 'shakuhachi and field recordings',
+      'kuzemallu': 'string quartet',
+      'bosque': 'viola, double bass, vibraphone, percussion, singing and clarinet',
+      'llamaban': 'string quartet and performer',
+      'polyflux': 'vocal ensemble',
+      'purpur': 'solo cello',
+      'afuerigena': 'livelooping · generative visuals · spoken word',
+      'laberinto': 'speakers, flute, clarinet, piano and percussion'
+    }
+  },
+  ja: {
+    role: '作曲家 · パフォーマー · サウンドアーティスト',
+    desc: '彼女の作品は、現代室内楽の作曲とラテンアメリカのネオバロック文学の交差点を探求し、象徴的なもの、身振り的なもの、物質的なもの、星際的なものの間の間隙を航行します。その実践は即興、サウンドアート、パフォーマンス、そして他の夢幻的な中間性を取り入れています。',
+    cta: 'ニューヨークとイタリアへ音楽を届けるお手伝いを — クラウドファンディング',
+    worksLabel: '選定作品',
+    navGallery: 'ギャラリー', navContact: 'お問い合わせ', navCrowd: 'クラウドファンディング',
+    bioSubtitle: '作曲家 · マルチ楽器奏者 · サウンドアーティスト · パフォーマー',
+    bioP1: 'アダ・ゴミスは、アルゼンチン、ブエノスアイレス州ベジャ・ビスタ出身の作曲家、サウンドアーティスト、歌手、管楽器奏者です。',
+    bioP2: '彼女の作品は、現代室内楽の作曲とラテンアメリカのネオバロック文学の交差点を探求し、象徴的なもの、身振り的なもの、物質的なもの、星際的なものの間の間隙を航行します。',
+    bioP3: '彼女は自由即興と半自由即興、魅惑的なフィールドレコーディング、舞踏の同朋、そして他の夢幻的な中間性へ向かった実践に身を置いています。',
+    bioP4: '彼女の作品はドイツ、アルゼンチン、デンマーク、イタリアで初演され、ダルムシュタット夏期講習、Distat Terra Festival、Slow Festival、Urondo Contemporáneoなどのフェスティバルや、Kirsten Kjærs Museum、Spazio Mostro、Arte x Arteなどの会場で上演されました。',
+    bioP5: '彼女はトレス・デ・フェブレロ国立大学（UNTREF）で音楽学士号を修了中であり、ラウル・ミンスバーグが率いるサウンドアート修士課程の聴覚性研究チームの一員です。',
+    crowdTitle: 'クラウドファンディング · 2026',
+    crowdHeading: '音楽をニューヨークとヨーロッパへ届けるお手伝いを',
+    crowdSub: 'TAK LAB（ニューヨーク）· Foresty Festival（ピエモンテ、イタリア）· 2026',
+    crowdCta: 'キャンペーンを見て支援する',
+    footer: '全著作権所有',
+    coming: '近日公開',
+    viewWork: '作品を見る', viewScore: '楽譜を見る',
+    workVenues: {
+      'dos-cisnes': '二本のバスクラリネットのために',
+      'hipnoidal': '舞踏 · 影絵劇 · ライブミュージック',
+      'huella-winka': '尺八とフィールドレコーディング',
+      'kuzemallu': '弦楽四重奏',
+      'bosque': 'ヴィオラ、コントラバス、ヴィブラフォン、打楽器、歌、クラリネット',
+      'llamaban': '弦楽四重奏とパフォーマー',
+      'polyflux': '声楽アンサンブル',
+      'purpur': 'チェロ独奏',
+      'afuerigena': 'ライブループ · 生成ビジュアル · 朗読',
+      'laberinto': '語り手、フルート、クラリネット、ピアノ、打楽器'
+    }
+  },
+  pt: {
+    role: 'compositora · performer · artista sonora',
+    desc: 'Seu trabalho explora as interseções entre a composição de música de câmara contemporânea e a literatura neobarroca latino-americana, navegando pelos interstícios entre o simbólico, o gestual, o material e o estelar. Sua prática incorpora improvisação, arte sonora, performance e outras intermedialidades oníricas.',
+    cta: 'Me ajude a levar minha música para Nova York e Itália — Crowdfunding',
+    worksLabel: 'Obras Selecionadas',
+    navGallery: 'Galeria', navContact: 'Contato', navCrowd: 'Crowdfunding',
+    bioSubtitle: 'Compositora · Multi-instrumentista · Artista Sonora · Performer',
+    bioP1: 'Ada Gomiz é compositora, artista sonora, cantora e instrumentista de sopro de Bella Vista, Buenos Aires, Argentina.',
+    bioP2: 'Seu trabalho explora as interseções entre a composição de música de câmara contemporânea e a literatura neobarroca latino-americana, navegando pelos interstícios entre o simbólico, o gestual, o material e o estelar.',
+    bioP3: 'Ela habita práticas orientadas para a improvisação livre e não tão livre, field recording encantador, confrarias butoh e outras intermedialidades oníricas.',
+    bioP4: 'Suas obras foram estreadas na Alemanha, Argentina, Dinamarca e Itália, em festivais como os Ferienkurse de Darmstadt, Distat Terra Festival, Slow Festival e Urondo Contemporáneo, além de espaços como Kirsten Kjærs Museum, Spazio Mostro e Arte x Arte no âmbito da Bienal Sur.',
+    bioP5: 'Está concluindo a Licenciatura em Música na Universidade Nacional de Três de Fevereiro (UNTREF) e faz parte da equipe de pesquisa sobre auralidade do Mestrado em Arte Sonora, dirigido por Raúl Minsgburg.',
+    crowdTitle: 'Crowdfunding · Campanha 2026',
+    crowdHeading: 'Me ajude a levar minha música para Nova York e Europa',
+    crowdSub: 'TAK LAB (Nova York) · Foresty Festival (Piemonte, Itália) · 2026',
+    crowdCta: 'Ver a campanha e contribuir',
+    footer: 'todos os direitos reservados',
+    coming: 'Em Breve',
+    viewWork: 'ver obra', viewScore: 'ver partitura',
+    workVenues: {
+      'dos-cisnes': 'para dois clarinetes baixo',
+      'hipnoidal': 'butoh · teatro de sombras · música ao vivo',
+      'huella-winka': 'shakuhachi e gravações de campo',
+      'kuzemallu': 'quarteto de cordas',
+      'bosque': 'viola, contrabaixo, vibrafone, percussão, canto e clarinete',
+      'llamaban': 'quarteto de cordas e performer',
+      'polyflux': 'ensemble vocal',
+      'purpur': 'violoncelo solo',
+      'afuerigena': 'livelooping · visuais generativas · recitação',
+      'laberinto': 'recitadores, flauta, clarinete, piano e percussão'
+    }
+  },
+  it: {
+    role: 'compositrice · performer · artista sonora',
+    desc: 'Il suo lavoro esplora le intersezioni tra la composizione di musica da camera contemporanea e la letteratura neobarocca latinoamericana, navigando negli interstizi tra il simbolico, il gestuale, il materiale e lo stellare. La sua pratica incorpora improvvisazione, arte sonora, performance e altre intermedialità oniriche.',
+    cta: 'Aiutami a portare la mia musica a New York e in Italia — Crowdfunding',
+    worksLabel: 'Opere Selezionate',
+    navGallery: 'Galleria', navContact: 'Contatto', navCrowd: 'Crowdfunding',
+    bioSubtitle: 'Compositrice · Multi-strumentista · Artista Sonora · Performer',
+    bioP1: 'Ada Gomiz è compositrice, artista sonora, cantante e suonatrice di strumenti a fiato di Bella Vista, Buenos Aires, Argentina.',
+    bioP2: 'Il suo lavoro esplora le intersezioni tra la composizione di musica da camera contemporanea e la letteratura neobarocca latinoamericana, navigando negli interstizi tra il simbolico, il gestuale, il materiale e lo stellare.',
+    bioP3: 'Abita pratiche orientate verso l\'improvvisazione libera e non troppo libera, il field recording incantato, le confraternite butoh e altre intermedialità oniriche.',
+    bioP4: 'Le sue opere sono state presentate in prima assoluta in Germania, Argentina, Danimarca e Italia, in festival come i Ferienkurse di Darmstadt, il Distat Terra Festival, lo Slow Festival e Urondo Contemporáneo, nonché in spazi come il Kirsten Kjærs Museum, Spazio Mostro e Arte x Arte nell\'ambito della Bienal Sur.',
+    bioP5: 'Sta completando la Laurea in Musica presso l\'Università Nazionale di Tres de Febrero (UNTREF) e fa parte del gruppo di ricerca sull\'auralità del Master in Arte Sonora, diretto da Raúl Minsgburg.',
+    crowdTitle: 'Crowdfunding · Raccolta 2026',
+    crowdHeading: 'Aiutami a portare la mia musica a New York e in Europa',
+    crowdSub: 'TAK LAB (New York) · Foresty Festival (Piemonte, Italia) · 2026',
+    crowdCta: 'Guarda la raccolta e contribuisci',
+    footer: 'tutti i diritti riservati',
+    coming: 'Prossimamente',
+    viewWork: 'vedi opera', viewScore: 'vedi partitura',
+    workVenues: {
+      'dos-cisnes': 'per due clarinetti bassi',
+      'hipnoidal': 'butoh · teatro delle ombre · musica dal vivo',
+      'huella-winka': 'shakuhachi e registrazioni sul campo',
+      'kuzemallu': 'quartetto d\'archi',
+      'bosque': 'viola, contrabbasso, vibrafono, percussioni, canto e clarinetto',
+      'llamaban': 'quartetto d\'archi e performer',
+      'polyflux': 'ensemble vocale',
+      'purpur': 'violoncello solo',
+      'afuerigena': 'livelooping · visuals generative · recitazione',
+      'laberinto': 'recitanti, flauto, clarinetto, pianoforte e percussioni'
+    }
+  },
+  de: {
+    role: 'Komponistin · Performerin · Klangkünstlerin',
+    desc: 'Ihre Arbeit erkundet die Schnittstellen zwischen zeitgenössischer Kammermusikkomposition und lateinamerikanischer Neobarock-Literatur und navigiert durch die Zwischenräume des Symbolischen, Gestischen, Materiellen und Stellaren. Ihre Praxis umfasst Improvisation, Klangkunst, Performance und andere traumhafte Intermedialitäten.',
+    cta: 'Helft mir, meine Musik nach New York und Italien zu bringen — Crowdfunding',
+    worksLabel: 'Ausgewählte Werke',
+    navGallery: 'Galerie', navContact: 'Kontakt', navCrowd: 'Crowdfunding',
+    bioSubtitle: 'Komponistin · Multiinstrumentalistin · Klangkünstlerin · Performerin',
+    bioP1: 'Ada Gomiz ist Komponistin, Klangkünstlerin, Sängerin und Bläserin aus Bella Vista, Buenos Aires, Argentinien.',
+    bioP2: 'Ihre Arbeit erkundet die Schnittstellen zwischen zeitgenössischer Kammermusikkomposition und lateinamerikanischer Neobarock-Literatur und navigiert durch die Zwischenräume des Symbolischen, Gestischen, Materiellen und Stellaren.',
+    bioP3: 'Sie bewohnt Praktiken, die auf freie und nicht ganz so freie Improvisation, verzaubertes Field Recording, Butoh-Bruderschaften und andere traumhafte Intermedialitäten ausgerichtet sind.',
+    bioP4: 'Ihre Werke wurden in Deutschland, Argentinien, Dänemark und Italien uraufgeführt, bei Festivals wie den Darmstädter Ferienkursen, dem Distat Terra Festival, dem Slow Festival und Urondo Contemporáneo, sowie an Orten wie dem Kirsten Kjærs Museum, Spazio Mostro und Arte x Arte im Rahmen der Bienal Sur.',
+    bioP5: 'Sie schließt ihren Bachelor in Musik an der Nationalen Universität von Tres de Febrero (UNTREF) ab und ist Teil des Auralitätsforschungsteams des Masterprogramms für Klangkunst unter der Leitung von Raúl Minsgburg.',
+    crowdTitle: 'Crowdfunding · Sammlung 2026',
+    crowdHeading: 'Helft mir, meine Musik nach New York und Europa zu bringen',
+    crowdSub: 'TAK LAB (New York) · Foresty Festival (Piemont, Italien) · 2026',
+    crowdCta: 'Kampagne ansehen und beitragen',
+    footer: 'Alle Rechte vorbehalten',
+    coming: 'Demnächst',
+    viewWork: 'Werk ansehen', viewScore: 'Partitur ansehen',
+    workVenues: {
+      'dos-cisnes': 'für zwei Bassklarinetten',
+      'hipnoidal': 'Butoh · Schattentheater · Live-Musik',
+      'huella-winka': 'Shakuhachi und Feldaufnahmen',
+      'kuzemallu': 'Streichquartett',
+      'bosque': 'Viola, Kontrabass, Vibraphon, Schlagzeug, Gesang und Klarinette',
+      'llamaban': 'Streichquartett und Performerin',
+      'polyflux': 'Vokalensemble',
+      'purpur': 'Cello solo',
+      'afuerigena': 'Livelooping · generative Visuals · gesprochenes Wort',
+      'laberinto': 'Sprecher, Flöte, Klarinette, Klavier und Schlagzeug'
+    }
+  }
+};
+
+function setLang(l) {
+  lang = l;
+  const t = T[l];
+  document.documentElement.lang = l;
+
+  // Update btn label
+  const codes = {es:'ES',en:'EN',ja:'JA',pt:'PT',it:'IT',de:'DE'};
+  document.getElementById('lang-btn-label').innerHTML = codes[l] + ' <svg viewBox="0 0 10 6"><polyline points="1,1 5,5 9,1"/></svg>';
+
+  // Mark active in menu
+  document.querySelectorAll('#lang-menu button').forEach(b => b.classList.toggle('active', b.dataset.lcode === l));
+
+  // Close menu
+  document.getElementById('lang-picker').classList.remove('open');
+
+  // Hero
+  document.getElementById('t-hero-role').textContent = t.role;
+  document.getElementById('t-hero-desc').textContent = t.desc;
+  document.getElementById('t-hero-cta').textContent = t.cta;
+
+  // Nav
+  document.getElementById('t-nav-gallery').textContent = t.navGallery;
+  document.getElementById('t-nav-contact').textContent = t.navContact;
+  document.getElementById('t-nav-crowd').textContent = t.navCrowd;
+
+  // Works section label
+  document.getElementById('t-works-label').textContent = t.worksLabel;
+
+  // Work card venues & buttons
+  Object.keys(t.workVenues).forEach(id => {
+    const venueEl = document.getElementById('t-venue-' + id);
+    if (venueEl) venueEl.textContent = t.workVenues[id];
+    const btnEl = document.getElementById('t-btn-' + id);
+    if (btnEl) btnEl.textContent = t.viewWork;
+  });
+
+  // Bio
+  document.getElementById('t-bio-subtitle').textContent = t.bioSubtitle;
+  document.getElementById('t-bio-p1').textContent = t.bioP1;
+  document.getElementById('t-bio-p2').textContent = t.bioP2;
+  document.getElementById('t-bio-p3').textContent = t.bioP3;
+  document.getElementById('t-bio-p4').textContent = t.bioP4;
+  document.getElementById('t-bio-p5').textContent = t.bioP5;
+
+  // Crowdfunding section
+  const ctLabel = document.getElementById('t-crowd-label');
+  const ctHead  = document.getElementById('t-crowd-heading');
+  const ctSub   = document.getElementById('t-crowd-sub');
+  const ctCta   = document.getElementById('t-crowd-cta');
+  if(ctLabel) ctLabel.textContent = t.crowdTitle;
+  if(ctHead)  ctHead.textContent  = t.crowdHeading;
+  if(ctSub)   ctSub.textContent   = t.crowdSub;
+  if(ctCta)   ctCta.textContent   = t.crowdCta;
+
+  // Coming soon label
+  const comEl = document.getElementById('t-coming-label');
+  if(comEl) comEl.textContent = t.coming;
+
+  // Footer
+  const footEl = document.getElementById('t-footer');
+  if(footEl) footEl.textContent = t.footer;
+}
+
+function toggleLangMenu(e) {
+  e.stopPropagation();
+  document.getElementById('lang-picker').classList.toggle('open');
+}
+document.addEventListener('click', function() {
+  document.getElementById('lang-picker').classList.remove('open');
+});
+
+// Auto-detect on load
 const userLang = navigator.language || navigator.userLanguage || 'es';
-if (!/^es/i.test(userLang)) toggleLang();
+const autoLang = userLang.startsWith('ja') ? 'ja'
+  : userLang.startsWith('pt') ? 'pt'
+  : userLang.startsWith('it') ? 'it'
+  : userLang.startsWith('de') ? 'de'
+  : /^es/i.test(userLang) ? 'es' : 'en';
+setLang(autoLang);
 
 function openLightbox(src){document.getElementById('lb-img').src=src;document.getElementById('lightbox').classList.add('open');}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget||e.target.id==='lightbox-close')document.getElementById('lightbox').classList.remove('open');});
