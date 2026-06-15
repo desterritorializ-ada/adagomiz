@@ -461,10 +461,10 @@ loadCrowdfundingData();
           <li><a href="#" onclick="openWork('laberinto');return false;">Laberinto Áureo (2020)</a></li>
         </ul>
       </li>
-      <li><a href="#bio">Bio</a></li>
+      <li><a href="#bio" id="t-nav-bio">Bio</a></li>
       <li><a href="#gallery" id="t-nav-gallery">Galería</a></li>
-      <li><a href="#cv">CV</a></li>
-      <li><a href="#logbook">Log-book</a></li>
+      <li><a href="#cv" id="t-nav-cv">CV</a></li>
+      <li><a href="#logbook" id="t-nav-logbook">Log-book</a></li>
       <li><a href="#contact" id="t-nav-contact">Contacto</a></li>
       <li><a href="https://adagomiz.com.ar/crowdfunding" style="color:var(--gold);opacity:1;" id="t-nav-crowd">Crowdfunding</a></li>
     </ul>
@@ -540,7 +540,7 @@ loadCrowdfundingData();
 </section>
 
 <section id="cv">
-  <div class="sec-label">CV 2026</div>
+  <div class="sec-label" id="t-cv-label">CV 2026</div>
   <div class="cv-grid">
     <div class="cv-block reveal">
       <h3 id="t-cv-education">Educación</h3>
@@ -557,23 +557,23 @@ loadCrowdfundingData();
     </div>
     <div class="cv-block reveal">
       <h3 id="t-cv-works">Obras Seleccionadas</h3>
-      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Dos Cisnes Negros</div><div class="cv-entry-detail">Casa Brandon — Federico Landaburu, Lautaro Abrego</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Hipnoidal</div><div class="cv-entry-detail">Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Dos Cisnes Negros</div><div class="cv-entry-detail"><span data-t="cvDosCisnesDetail">Casa Brandon — Federico Landaburu, Lautaro Abrego</span></div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Hipnoidal</div><div class="cv-entry-detail"><span data-t="cvHipnoidalDetail">Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36</span></div></div>
       <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Huella Winka — Censored</div><div class="cv-entry-detail">Darmstadt Ferienkurse</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title">Küzemallu (asunto de nieblas azules)</div><div class="cv-entry-detail">Distat Terra Festival — Maurice Quartet</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2024</div><div class="cv-entry-title">Intermundya</div><div class="cv-entry-detail">Casa Brandon</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2023</div><div class="cv-entry-title">Bosque de Adas</div><div class="cv-entry-detail">Casa Brandon</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Llamaban los Almúedanos</div><div class="cv-entry-detail">Casa Brandon</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Polyfluxaoboiotic</div><div class="cv-entry-detail">Urondo Contemporáneo — Ensamble Vocal UNTREF</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Púrpur</div><div class="cv-entry-detail">Teatro De La Fábula — Martín Devoto, cello</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title"><span data-t="cvKuzemalluTitle">Küzemallu (asunto de nieblas azules)</span></div><div class="cv-entry-detail"><span data-t="cvKuzemalluDetail">Distat Terra Festival — Maurice Quartet</span></div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2024</div><div class="cv-entry-title"><span data-t="cvIntermundya">Intermundya</span></div><div class="cv-entry-detail">Casa Brandon</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2023</div><div class="cv-entry-title"><span data-t="cvBosqueTitle">Bosque de Adas</span></div><div class="cv-entry-detail">Casa Brandon</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title"><span data-t="cvLlamabanTitle">Llamaban los Almúedanos</span></div><div class="cv-entry-detail">Casa Brandon</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Polyfluxaoboiotic</div><div class="cv-entry-detail"><span data-t="cvPolyfluxDetail">Urondo Contemporáneo — Ensamble Vocal UNTREF</span></div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Púrpur</div><div class="cv-entry-detail"><span data-t="cvPurpurDetail">Teatro De La Fábula — Martín Devoto, cello</span></div></div>
       <div class="cv-entry"><div class="cv-entry-year">2021</div><div class="cv-entry-title">Afuerígena</div><div class="cv-entry-detail">La Fábula</div></div>
       <div class="cv-entry"><div class="cv-entry-year">2020</div><div class="cv-entry-title">Laberinto Áureo</div><div class="cv-entry-detail">UNTREF</div></div>
     </div>
     <div class="cv-block reveal">
       <h3 id="t-cv-ensemble">Con el Ensamble Vocal UNTREF</h3>
-      <div class="cv-entry"><div class="cv-entry-year">2024</div><div class="cv-entry-title">Renuntio Vitalis</div><div class="cv-entry-detail">MUNAR — Lau Lovotti y A. Guisiarri</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2024</div><div class="cv-entry-title">Renuntio Vitalis</div><div class="cv-entry-detail"><span data-t="cvLauLovotti">MUNAR — Lau Lovotti y A. Guisiarri</span></div></div>
       <div class="cv-entry"><div class="cv-entry-year">2024</div><div class="cv-entry-title"><span data-t="cvCicloMusica">Ciclo de Música para Ensambles</span></div><div class="cv-entry-detail">UNTREF</div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2023</div><div class="cv-entry-title">Los Últimos</div><div class="cv-entry-detail">UTN — Martín Virgili</div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2023</div><div class="cv-entry-title"><span data-t="cvLosUltimos">Los Últimos</span></div><div class="cv-entry-detail">UTN — Martín Virgili</div></div>
       <div class="cv-entry"><div class="cv-entry-year">2023</div><div class="cv-entry-title">La Verdad 21</div><div class="cv-entry-detail">CC Haroldo Conti</div></div>
       <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title">Fauna Festival</div><div class="cv-entry-detail">C.C. Borges</div></div>
       <div class="cv-entry"><div class="cv-entry-year">2022</div><div class="cv-entry-title"><span data-t="cvNocheMuseos">La Noche de los Museos</span></div><div class="cv-entry-detail">Museo de Inmigrantes UNTREF</div></div>
@@ -583,7 +583,7 @@ loadCrowdfundingData();
     <div class="cv-block reveal">
       <h3 id="t-cv-research">Investigación y Becas</h3>
       <div class="cv-entry"><div class="cv-entry-year">2025</div><div class="cv-entry-title"><span data-t="cvGrupoAuralidad">Grupo de Investigación sobre Auralidad</span></div><div class="cv-entry-detail"><span data-t="cvMaestria">Maestría en Arte Sonoro — UNTREF (dir. Raúl Minsburg)</span></div></div>
-      <div class="cv-entry"><div class="cv-entry-year">2022–2023</div><div class="cv-entry-title">Mala Praxis</div><div class="cv-entry-detail"><span data-t="cvMalaPraxis">Arte, ciencia y educación con escuelas secundarias — UNTREF</span></div></div>
+      <div class="cv-entry"><div class="cv-entry-year">2022–2023</div><div class="cv-entry-title"><span data-t="cvMalaPraxisTitle">Mala Praxis</span></div><div class="cv-entry-detail"><span data-t="cvMalaPraxis">Arte, ciencia y educación con escuelas secundarias — UNTREF</span></div></div>
       <div class="cv-entry"><div class="cv-entry-year">2021</div><div class="cv-entry-title"><span data-t="cvPython2">Programación Python para Artistas</span></div><div class="cv-entry-detail">WIP Art Center</div></div>
       <div class="cv-entry"><div class="cv-entry-year">2017</div><div class="cv-entry-title"><span data-t="cvBeca">Beca — Clínica Esquizoanalítica</span></div><div class="cv-entry-detail">Centro Félix Guattari, Uruguay</div></div>
     </div>
@@ -601,7 +601,7 @@ loadCrowdfundingData();
 <section id="coming" class="coming-section">
   <div class="sec-label" id="t-coming-label">Próximamente</div>
   <div class="coming-grid">
-    <div class="coming-card reveal"><div class="coming-year">2027</div><div class="coming-title">ARENA, ESPUMA Y LO INFINITO OCEÁNICO</div><div class="coming-detail">Dúo Alterface — piano, xeremias, percusión, electrónica</div></div>
+    <div class="coming-card reveal"><div class="coming-year">2027</div><div class="coming-title"><span data-t="comingArenaTitle">ARENA, ESPUMA Y LO INFINITO OCEÁNICO</span></div><div class="coming-detail"><span data-t="comingArenaDetail">Dúo Alterface — piano, xeremias, percusión, electrónica</span></div></div>
     <div class="coming-card reveal"><div class="coming-year">2026</div><div class="coming-title">FLAMENCO TRANSPLATINO</div><div class="coming-detail"><span data-t="comingFlamenco">Álbum. Para ensamble.</span></div></div>
     <div class="coming-card reveal"><div class="coming-year">2026</div><div class="coming-title">HUELLA WINKA</div><div class="coming-detail"><span data-t="comingHuella">Álbum. Shakuhachi y grabaciones de campo.</span></div></div>
     <div class="coming-card reveal"><div class="coming-year">2026</div><div class="coming-title">DARMSTADT KUIR</div><div class="coming-detail"><span data-t="comingDarmstadt">Álbum. Improvisaciones colectivas. Relative Pitch Records (New York)</span></div></div>
@@ -609,7 +609,7 @@ loadCrowdfundingData();
 </section>
 
 <section id="logbook" class="log-section">
-  <div class="sec-label">Log-book</div>
+  <div class="sec-label" id="t-logbook-label">Log-book</div>
   <div class="log-list">
     <div class="log-entry reveal"><div class="log-date">2026</div><div><div class="log-title">Tak Lab</div><div class="log-body">New York</div></div></div>
     <div class="log-entry reveal"><div class="log-date">2026</div><div><div class="log-title">Foresty Festival</div><div class="log-body">Workshop with Clara Ianotta and Colletivo 21</div></div></div>
@@ -689,7 +689,7 @@ const T = {
     desc: 'Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar. Su práctica incorpora improvisación, arte sonoro, performance y otros mundos intermedialidades.',
     cta: 'Ayudame a llevar mi música a Nueva York e Italia — Crowdfunding',
     worksLabel: 'Obras Seleccionadas',
-    navGallery: 'Galería', navContact: 'Contacto', navCrowd: 'Crowdfunding',
+    navWorks: 'Obras', navBio: 'Bio', navGallery: 'Galería', navCV: 'CV', navLogbook: 'Log-book', navContact: 'Contacto', navCrowd: 'Crowdfunding',
     bioSubtitle: 'Compositora · Multiinstrumentista · Artista Sonora · Performer',
     bioP1: 'Ada Gomiz es compositora, artista sonora, cantante y vientista de Bella Vista, Buenos Aires, Argentina.',
     bioP2: 'Su trabajo rastrea los intercruces entre la composición de música de cámara contemporánea y literatura neobarroca latinoamericana, explorando intersticios entre lo simbólico, lo gestual, lo matérico y lo estelar.',
@@ -721,7 +721,7 @@ const T = {
     desc: 'Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar. Her practice incorporates improvisation, sound art, performance and other dreamlike intermedialities.',
     cta: 'Help me bring music to New York and Italy — Crowdfunding',
     worksLabel: 'Selected Works',
-    navGallery: 'Gallery', navContact: 'Contact', navCrowd: 'Crowdfunding',
+    navWorks: 'Works', navBio: 'Bio', navGallery: 'Gallery', navCV: 'CV', navLogbook: 'Log-book', navContact: 'Contact', navCrowd: 'Crowdfunding',
     bioSubtitle: 'Composer · Multi-instrumentalist · Sound Artist · Performer',
     bioP1: 'Ada Gomiz is a composer, sound artist, singer and wind player from Bella Vista, Buenos Aires, Argentina.',
     bioP2: 'Her work explores the intersections between contemporary chamber music composition and Latin American neo-baroque literature, navigating the interstices between the symbolic, the gestural, the material and the stellar.',
@@ -753,7 +753,7 @@ const T = {
     desc: '彼女の作品は、現代室内楽の作曲とラテンアメリカのネオバロック文学の交差点を探求し、象徴的なもの、身振り的なもの、物質的なもの、星際的なものの間の間隙を航行します。その実践は即興、サウンドアート、パフォーマンス、そして他の夢幻的な中間性を取り入れています。',
     cta: 'ニューヨークとイタリアへ音楽を届けるお手伝いを — クラウドファンディング',
     worksLabel: '選定作品',
-    navGallery: 'ギャラリー', navContact: 'お問い合わせ', navCrowd: 'クラウドファンディング',
+    navWorks: '作品', navBio: 'プロフィール', navGallery: 'ギャラリー', navCV: 'CV', navLogbook: '記録', navContact: 'お問い合わせ', navCrowd: 'クラウドファンディング',
     bioSubtitle: '作曲家 · マルチ楽器奏者 · サウンドアーティスト · パフォーマー',
     bioP1: 'アダ・ゴミスは、アルゼンチン、ブエノスアイレス州ベジャ・ビスタ出身の作曲家、サウンドアーティスト、歌手、管楽器奏者です。',
     bioP2: '彼女の作品は、現代室内楽の作曲とラテンアメリカのネオバロック文学の交差点を探求し、象徴的なもの、身振り的なもの、物質的なもの、星際的なものの間の間隙を航行します。',
@@ -785,7 +785,7 @@ const T = {
     desc: 'Seu trabalho explora as interseções entre a composição de música de câmara contemporânea e a literatura neobarroca latino-americana, navegando pelos interstícios entre o simbólico, o gestual, o material e o estelar. Sua prática incorpora improvisação, arte sonora, performance e outras intermedialidades oníricas.',
     cta: 'Me ajude a levar minha música para Nova York e Itália — Crowdfunding',
     worksLabel: 'Obras Selecionadas',
-    navGallery: 'Galeria', navContact: 'Contato', navCrowd: 'Crowdfunding',
+    navWorks: 'Obras', navBio: 'Bio', navGallery: 'Galeria', navCV: 'CV', navLogbook: 'Diário', navContact: 'Contato', navCrowd: 'Crowdfunding',
     bioSubtitle: 'Compositora · Multi-instrumentista · Artista Sonora · Performer',
     bioP1: 'Ada Gomiz é compositora, artista sonora, cantora e instrumentista de sopro de Bella Vista, Buenos Aires, Argentina.',
     bioP2: 'Seu trabalho explora as interseções entre a composição de música de câmara contemporânea e a literatura neobarroca latino-americana, navegando pelos interstícios entre o simbólico, o gestual, o material e o estelar.',
@@ -817,7 +817,7 @@ const T = {
     desc: 'Il suo lavoro esplora le intersezioni tra la composizione di musica da camera contemporanea e la letteratura neobarocca latinoamericana, navigando negli interstizi tra il simbolico, il gestuale, il materiale e lo stellare. La sua pratica incorpora improvvisazione, arte sonora, performance e altre intermedialità oniriche.',
     cta: 'Aiutami a portare la mia musica a New York e in Italia — Crowdfunding',
     worksLabel: 'Opere Selezionate',
-    navGallery: 'Galleria', navContact: 'Contatto', navCrowd: 'Crowdfunding',
+    navWorks: 'Opere', navBio: 'Bio', navGallery: 'Galleria', navCV: 'CV', navLogbook: 'Diario', navContact: 'Contatto', navCrowd: 'Crowdfunding',
     bioSubtitle: 'Compositrice · Multi-strumentista · Artista Sonora · Performer',
     bioP1: 'Ada Gomiz è compositrice, artista sonora, cantante e suonatrice di strumenti a fiato di Bella Vista, Buenos Aires, Argentina.',
     bioP2: 'Il suo lavoro esplora le intersezioni tra la composizione di musica da camera contemporanea e la letteratura neobarocca latinoamericana, navigando negli interstizi tra il simbolico, il gestuale, il materiale e lo stellare.',
@@ -849,7 +849,7 @@ const T = {
     desc: 'Ihre Arbeit erkundet die Schnittstellen zwischen zeitgenössischer Kammermusikkomposition und lateinamerikanischer Neobarock-Literatur und navigiert durch die Zwischenräume des Symbolischen, Gestischen, Materiellen und Stellaren. Ihre Praxis umfasst Improvisation, Klangkunst, Performance und andere traumhafte Intermedialitäten.',
     cta: 'Helft mir, meine Musik nach New York und Italien zu bringen — Crowdfunding',
     worksLabel: 'Ausgewählte Werke',
-    navGallery: 'Galerie', navContact: 'Kontakt', navCrowd: 'Crowdfunding',
+    navWorks: 'Werke', navBio: 'Bio', navGallery: 'Galerie', navCV: 'CV', navLogbook: 'Tagebuch', navContact: 'Kontakt', navCrowd: 'Crowdfunding',
     bioSubtitle: 'Komponistin · Multiinstrumentalistin · Klangkünstlerin · Performerin',
     bioP1: 'Ada Gomiz ist Komponistin, Klangkünstlerin, Sängerin und Bläserin aus Bella Vista, Buenos Aires, Argentinien.',
     bioP2: 'Ihre Arbeit erkundet die Schnittstellen zwischen zeitgenössischer Kammermusikkomposition und lateinamerikanischer Neobarock-Literatur und navigiert durch die Zwischenräume des Symbolischen, Gestischen, Materiellen und Stellaren.',
@@ -899,8 +899,13 @@ function setLang(l) {
   document.getElementById('t-hero-cta').textContent = t.cta;
 
   // Nav
+  document.getElementById('t-nav-works').textContent   = t.navWorks;
+  document.getElementById('t-nav-bio').textContent     = t.navBio;
   document.getElementById('t-nav-gallery').textContent = t.navGallery;
+  document.getElementById('t-nav-cv').textContent      = t.navCV;
+  document.getElementById('t-nav-logbook').textContent = t.navLogbook;
   document.getElementById('t-nav-contact').textContent = t.navContact;
+  document.getElementById('t-nav-crowd').textContent   = t.navCrowd;
   document.getElementById('t-nav-crowd').textContent = t.navCrowd;
 
   // Works section label
@@ -992,8 +997,24 @@ const DT = {
   'logWorldPremiere':     {es:'Estreno mundial.',en:'World premiere.',ja:'世界初演。',pt:'Estreia mundial.',it:'Prima mondiale.',de:'Weltpremiere.'},
   'logOrangerie':         {es:'Presentada en la Orangerie en solidaridad con Bill Dietz.',en:'Presented at the Orangerie in solidarity with Bill Dietz.',ja:'ビル・ディーツへの連帯としてオランジュリーで発表。',pt:'Apresentada na Orangerie em solidariedade com Bill Dietz.',it:"Presentata all'Orangerie in solidarietà con Bill Dietz.",de:'In der Orangerie in Solidarität mit Bill Dietz präsentiert.'},
   'logSoloPerf':          {es:'Performance solista.',en:'Solo performance.',ja:'ソロ・パフォーマンス。',pt:'Performance solo.',it:'Performance solista.',de:'Solo-Performance.'},
-  // Gallery / Contact labels (used via ID directly)
-  't-gallery-label':      {es:'Galería',en:'Gallery',ja:'ギャラリー',pt:'Galeria',it:'Galleria',de:'Galerie'},
+  // Extra CV entries added later
+  'cvRenuntioDetail':   {es:'MUNAR — Lau Lovotti y A. Guisiarri',en:'MUNAR — Lau Lovotti and A. Guisiarri',ja:'MUNAR — ラウ・ロヴォッティ、A・グイシャリ',pt:'MUNAR — Lau Lovotti e A. Guisiarri',it:'MUNAR — Lau Lovotti e A. Guisiarri',de:'MUNAR — Lau Lovotti und A. Guisiarri'},
+  'cvLauLovotti':       {es:'MUNAR — Lau Lovotti y A. Guisiarri',en:'MUNAR — Lau Lovotti and A. Guisiarri',ja:'MUNAR — ラウ・ロヴォッティ、A・グイシャリ',pt:'MUNAR — Lau Lovotti e A. Guisiarri',it:'MUNAR — Lau Lovotti e A. Guisiarri',de:'MUNAR — Lau Lovotti und A. Guisiarri'},
+  'cvLosUltimos':       {es:'Los Últimos',en:'Los Últimos',ja:'最後の者たち',pt:'Os Últimos',it:'Gli Ultimi',de:'Die Letzten'},
+  'cvMalaPraxisTitle':  {es:'Mala Praxis',en:'Mala Praxis',ja:'マラ・プラクシス',pt:'Mala Praxis',it:'Mala Praxis',de:'Mala Praxis'},
+  'cvBosqueTitle':      {es:'Bosque de Adas',en:'Bosque de Adas',ja:'アダの森',pt:'Bosque de Adas',it:'Bosque de Adas',de:'Bosque de Adas'},
+  'cvIntermundya':      {es:'Intermundya',en:'Intermundya',ja:'インテルムンジャ',pt:'Intermundya',it:'Intermundya',de:'Intermundya'},
+  'cvPolyfluxDetail':   {es:'Urondo Contemporáneo — Ensamble Vocal UNTREF',en:'Urondo Contemporáneo — UNTREF Vocal Ensemble',ja:'ウロンド・コンテンポラネオ — UNTREFボーカルアンサンブル',pt:'Urondo Contemporáneo — Ensemble Vocal UNTREF',it:'Urondo Contemporáneo — Ensemble Vocale UNTREF',de:'Urondo Contemporáneo — UNTREF-Vokalensemble'},
+  'cvPurpurDetail':     {es:'Teatro De La Fábula — Martín Devoto, cello',en:'Teatro De La Fábula — Martín Devoto, cello',ja:'テアトロ・デ・ラ・ファブラ — マルティン・デヴォート、チェロ',pt:'Teatro De La Fábula — Martín Devoto, violoncelo',it:'Teatro De La Fábula — Martín Devoto, violoncello',de:'Teatro De La Fábula — Martín Devoto, Cello'},
+  'cvDosCisnesDetail':  {es:'Casa Brandon — Federico Landaburu, Lautaro Abrego',en:'Casa Brandon — Federico Landaburu, Lautaro Abrego',ja:'カサ・ブランドン — フェデリコ・ランダブル、ラウタロ・アブレゴ',pt:'Casa Brandon — Federico Landaburu, Lautaro Abrego',it:'Casa Brandon — Federico Landaburu, Lautaro Abrego',de:'Casa Brandon — Federico Landaburu, Lautaro Abrego'},
+  'cvHipnoidalDetail':  {es:'Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36',en:'Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36',ja:'キルステン・キャーン博物館 · スパツィオ・モストロ · スロー・フェスティバル · アート・ウィーク36',pt:'Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36',it:'Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36',de:'Kirsten Kjæn Museum · Spazio Mostro · Slow Festival · Art Week 36'},
+  'cvKuzemalluTitle':   {es:'Küzemallu (asunto de nieblas azules)',en:'Küzemallu (matter of blue mists)',ja:'クゼマジュ（青い霧の事象）',pt:'Küzemallu (assunto de névoas azuis)',it:'Küzemallu (questione di nebbie azzurre)',de:'Küzemallu (Sache der blauen Nebel)'},
+  'cvKuzemalluDetail':  {es:'Distat Terra Festival — Maurice Quartet',en:'Distat Terra Festival — Maurice Quartet',ja:'ディスタット・テラ・フェスティバル — モーリス四重奏団',pt:'Distat Terra Festival — Maurice Quartet',it:'Distat Terra Festival — Maurice Quartet',de:'Distat Terra Festival — Maurice Quartet'},
+  'cvLlamabanTitle':    {es:'Llamaban los Almúedanos',en:'Llamaban los Almúedanos',ja:'ムエジンたちが呼んでいた',pt:'Llamaban los Almúedanos',it:'Llamaban los Almúedanos',de:'Llamaban los Almúedanos'},
+  'comingArenaTitle':   {es:'ARENA, ESPUMA Y LO INFINITO OCEÁNICO',en:'SAND, FOAM AND THE OCEANIC INFINITE',ja:'砂、泡、そして海洋の無限',pt:'AREIA, ESPUMA E O INFINITO OCEÂNICO',it:'ARENA, SCHIUMA E L\'INFINITO OCEANICO',de:'SAND, SCHAUM UND DAS OZEANISCHE UNENDLICHE'},
+  'comingArenaDetail':  {es:'Dúo Alterface — piano, xeremias, percusión, electrónica',en:'Duo Alterface — piano, xeremias, percussion, electronics',ja:'デュオ・アルテルファス — ピアノ、ゼレミアス、打楽器、エレクトロニクス',pt:'Duo Alterface — piano, xeremias, percussão, eletrônica',it:'Duo Alterface — pianoforte, xeremias, percussioni, elettronica',de:'Duo Alterface — Klavier, Xeremias, Schlagzeug, Elektronik'},
+  // Section label for logbook
+  't-logbook-label':    {es:'Log-book',en:'Log-book',ja:'記録',pt:'Diário',it:'Diario',de:'Tagebuch'},
   't-contact-label':      {es:'Contacto',en:'Contact',ja:'お問い合わせ',pt:'Contato',it:'Contatto',de:'Kontakt'},
 };
 
@@ -1002,8 +1023,14 @@ const _origSetLang = setLang;
 const setLangFull = function(l) {
   _origSetLang(l);
 
+  // CV label (CV 2026)
+  const cvLabelEl = document.getElementById('t-cv-label');
+  if (cvLabelEl) cvLabelEl.textContent = {es:'CV 2026',en:'CV 2026',ja:'CV 2026',pt:'CV 2026',it:'CV 2026',de:'CV 2026'}[l] || 'CV 2026';
+
+  // Nav Obras translation also needs updating (already done in _origSetLang via t.navWorks above)
+
   // Update gallery/contact labels via ID (reuse DT table)
-  ['t-gallery-label','t-contact-label'].forEach(function(id) {
+  ['t-gallery-label','t-contact-label','t-logbook-label'].forEach(function(id) {
     const el = document.getElementById(id);
     if (el && DT[id] && DT[id][l]) el.textContent = DT[id][l];
   });
